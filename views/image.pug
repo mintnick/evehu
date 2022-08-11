@@ -1,0 +1,9 @@
+mixin image(type, id, size= 32)
+  if id > 0
+    a(href = '/' + type + '/' + id)
+      if type == 'character'
+        img(src='https://image.evepc.163.com/Character/' + id + '_256.jpg', width= size, height= size).lazy.logo
+      else if type == 'corporation'
+        img(src='https://image.evepc.163.com/Corporation/' + id + '_256.png', width= size, height= size).lazy.logo
+      else if type == 'alliance'
+        img(src='https://image.evepc.163.com/Alliance/' + id + '_128.png', width= size, height= size).lazy.logo

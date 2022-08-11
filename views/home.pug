@@ -1,0 +1,35 @@
+extends layout
+include delta_list.pug
+include new_entity_list.pug
+include moving_char_list.pug
+
+block content
+  h2.title 联盟
+  div.row
+    div.col-sm
+      +delta('7日内增长', growing_alliances, 'alliance', 'up')
+    div.col-sm
+      +delta('7日内下降', shrinking_alliances, 'alliance', 'down')
+  div.row.mb-2
+    div.col-sm
+      +delta('角色数量', large_alliances, 'alliance', 'total')
+    div.col-sm
+      +new('新联盟', new_alliances, 'alliance')
+    
+  h2.title 公司
+  div.row
+    div.col-sm
+      +delta('7日内增长', growing_corporations, 'corporation', 'up')
+    div.col-sm
+      +delta('7日内下降', shrinking_corporations, 'corporation', 'down')
+  div.row.mb-2
+    div.col-sm
+      +delta('角色数量', large_corporations, 'corporation', 'total')
+    div.col-sm
+      +new('新公司', new_corporations, 'corporation')
+  h2.title 角色
+  div.row.mb-2
+    div.col-sm
+      +new('新角色', new_characters, 'character')
+    div.col-sm
+      +moving_char('雇佣变动', moving_characters, 'character')

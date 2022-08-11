@@ -1,0 +1,27 @@
+
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
+  .container-fluid
+    a.navbar-brand.logo(href='/')
+      img(src='/images/icon.svg', width='40', height='40', alt='')
+    a.navbar-brand(href='/') EVE户
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    div#navbarSupportedContent.collapse.navbar-collapse.row
+      ul.navbar-nav.mb-2.mb-lg-0.col-3.ps-3.pe-2
+        li.nav-item
+          a.nav-link(href='/') 首页
+        li.nav-item
+          a.nav-link(href='https://github.com/mintnick/evehu', target='_blank') Github
+      form(onsubmit= 'return false;' accept-charset="GB18030").d-flex.col-5
+        input.form-control.me-2(type='search', name='name', id='autocomplete' placeholder='搜索 角色/公司/联盟' aria-label='Search')
+      ul.navbar-nav.mb-2.mb-lg-0.col-3.ps-2
+        li.nav-item
+          a.nav-link(href='/info') 说明文档
+        li.nav-item
+          a.nav-link(href='/info#privacy') 隐私
+        li.nav-item
+          a.nav-link(href='/info#delay') 延迟
+        li.nav-item
+      ul.navbar-nav.mb-2.mb-lg-0.col-1
+          a.nav-link(href='/donate') 捐赠
+      

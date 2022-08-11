@@ -1,0 +1,9 @@
+extends layout
+include alli_details.pug
+
+block content
+  div.row.mt-5
+    div.col-4
+      +alli_details(details, details.alliance_id)
+    div.col-8
+      

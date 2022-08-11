@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title= 'EVE户 - ' + title
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='EVE户 - ' + title)
+    link(rel='icon' href='/images/icon.svg')
+
+    link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.min.css')
+
+    link(rel='preconnect', href='https://fonts.loli.net')
+    link(rel='preconnect' href='https://fonts.loli.net' crossrigin)
+    link(rel='stylesheet' href='https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@300;500&display=swap')
+
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body.dark
+    div.wrapper
+      include navbar.pug
+      
+    div.container
+      block content
+
+    div.container.mt-5
+      footer.footer
+        small
+          center
+            | Based on 
+            a(href='https://github.com/zKillboard/evewho') zkillboard/Eve Who
+            |  by Squizz
+            br
+            | Modified by 
+            a(href='https://github.com/mintnick') mintnick
+            br
+            | 本网站的游戏内数据，所有权属于CCP Games和网易游戏
+
+    script(src='/javascripts/jquery-3.6.0.min.js')
+    script(src='/javascripts/bootstrap/bootstrap.bundle.min.js')
+    script(src='/javascripts/jquery.autocomplete.min.js')
+    script(src='/javascripts/script.js')

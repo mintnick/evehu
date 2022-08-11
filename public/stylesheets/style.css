@@ -1,0 +1,88 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #212121;
+  padding: 50px;
+  /* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
+  color: #FAFAFA;
+  /* font-size: 20px; */
+  font-weight: 300;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+nav {
+  font-size: 1.5rem;
+}
+
+/* Navbar */
+.navbar-collapse form button {
+  width: 100px;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-right: 0;
+}
+
+.logo {
+  padding-top: 0px;
+}
+
+/* Table */
+table {
+  font-size: 1.2em;
+  padding: 0, 0;
+}
+
+table a {
+  text-decoration: none;
+}
+
+table tr > td.image {
+  width: 1%;
+  white-space: nowrap;
+}
+
+table .align-center {
+  text-align: center;
+}
+
+table .join {
+  color:chartreuse;
+}
+
+table .leave {
+  color:chocolate;
+}
+
+h2.title {
+  color: gold;
+}
+
+.table>:not(caption)>*>* {
+  padding: .2em .2em;
+}
+
+table.fixed-table {
+  table-layout: fixed;
+  width: 500px;
+}
+
+table td.detail-cell {
+  width: 230px;
+}
+
+/* auto-complete */
+.autocomplete-suggestions { border: 1px solid #999; background: rgb(33,37,41); overflow: auto; }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #20446f; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+.autocomplete-group { padding: 10px 10px 0; font-weight: bold; font-size: 1.2em; color: gold;}
+.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }

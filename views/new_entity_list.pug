@@ -1,0 +1,21 @@
+include image.pug
+
+mixin new(title, contents, type)
+  div.table-responsive
+    h5 #{title}&nbsp&nbsp
+      img(src='/images/new.svg', width= 30, height= 30, alt='').lazy
+    table.table.table-bordered.table-dark.table-hover.align-middle
+      thead.thead-light
+        tr
+          th.image
+          th.align-center.name 名称
+          th.align-center.number 起始时间
+      tbody
+        if contents != undefined
+          each row in contents
+            tr
+              td.image
+                +image(type, row.id, 48, row.name)
+              td.name
+                a(href='/' + type + '/' + row.id)= row.name
+              td.align-center.number= row.birthday

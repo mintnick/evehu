@@ -1,0 +1,28 @@
+include image.pug
+
+mixin moving_char(title, contents, type)
+  div.table-responsive
+    h5 #{title}&nbsp&nbsp
+      img(src='/images/change.svg', width= 30, height= 30, alt='').lazy
+    table.table.table-bordered.table-dark.table-hover.align-middle
+      thead.thead-light
+        tr
+          th.image
+          th.align-center.name 角色名
+          th.align-center.name 加入/离开
+          th.align-center 公司
+      tbody
+        if contents != undefined
+          each row in contents
+            tr
+              td.image
+                +image(type, row.ch_id, 48, row.ch_name)
+              td.name
+                a(href='/' + type + '/' + row.ch_id)= row.ch_name
+              if row.end_date == null
+                td.align-center.join 加入
+              else
+                td.align-center.leave 离开
+              //- td.align-center= (row.end_date == null ? '加入' : '离开')
+              td.align-center
+                a(href='/corporation/' + row.c_id)= row.c_name

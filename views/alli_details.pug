@@ -1,0 +1,41 @@
+include image.pug
+include kb_cell.pug
+
+mixin alli_details(details, id)
+  span.float-left.table.responsive
+    table.table.table-bordered.table-dark.align-middle.fixed-table
+      tr
+        td
+          +image('alliance', id, 256)
+        td.align-center.detail-cell
+          h3= title
+          h4 [#{details.ticker}]
+          br
+          h5 创始公司&nbsp&nbsp
+            br
+            a(href='/corporation/'+creator_corp.corporation_id)= creator_corp.name
+          br
+          h5 执行公司&nbsp&nbsp
+            br
+            a(href='/corporation/'+exec_corp.corporation_id)= exec_corp.name
+      tr
+        td.align-center
+          h5 公司数量
+        td.align-center
+          h5= details.corp_count
+      tr
+        td.align-center
+          h5 角色数量
+        td.align-center
+          h5= details.member_count
+      tr 
+        td.align-center
+          h5 7日内成员波动
+        td.align-center
+          h5= details.diff_7days
+      tr
+        td.align-center
+          h5 创始时间
+        td.align-center
+          h6= details.date_founded
+      +kb('alliance', details.alliance_id)

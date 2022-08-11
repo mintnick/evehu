@@ -1,0 +1,15 @@
+extends layout
+include delta_list.pug
+
+block content
+  h2 联盟
+  div.row
+    div.col-sm
+      +delta('角色数量', large_alliances, 'alliance')
+    div.col-sm
+      +delta('7日内增长', growing_alliances, 'alliance')
+  div.row
+    div.col-sm
+      +delta('7日内下降', shrinking_alliances, 'alliance')
+    div.col-sm
+      +delta('新联盟', new_alliances, 'alliance')
