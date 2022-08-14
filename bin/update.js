@@ -26,12 +26,12 @@ let init = [
 let tasks = {
     'get_old_entities_char.js': 1,
     // 'get_old_characters.js': 1, // finished
-    'get_characters.js': 1,
+    'get_characters.js': 300,
     'get_corporations.js': 600,
     'get_alliances.js': 3600,
 
     'update_characters.js': 1,
-    'update_corporations.js': 1800,
+    'update_corporations.js': 600,
     'update_alliances.js': 3600,
 
     'update_delta.js': 14400, // (4am - 8am)

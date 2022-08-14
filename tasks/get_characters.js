@@ -16,7 +16,12 @@ module.exports = async function (app) {
         while (id < max_id && id < next) {
             id++;
             let data = await esi(app, 'char', id);
-            if (data) await characters.add(app, id, data);
+            if (data) {
+                await characters.add(app, id, data);
+                
+                data = await esi(app, 'char', id + '/corporationhistory');
+                if (data) await characters.updateHistory(app, id, data);
+            } 
         }
         // console.log('max char id: ' + id);
         // fs.writeFileSync(path, id.toString())
