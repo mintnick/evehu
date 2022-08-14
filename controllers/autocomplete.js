@@ -4,7 +4,7 @@ const app = require('../app');
 module.exports = async function (req, res) {
     // const name = utf8.encode(req.query.query);
     const name = req.query.query;
-    console.log(name);
+    // console.log(name);
 
     let result = [];
     const chars = await search(res, 'character', name, false);
@@ -27,7 +27,7 @@ async function search(res, type, name, ticker) {
         let secondSort = (type == 'character' ? ' ' : ', member_count desc');
         let column = (ticker ? ' ticker ' : ' name ');
         let query = `select ${type}_id id, name from ${type}s where ${column} = ? or ${column} like ? order by name ${secondSort} limit 10`;
-        console.log(query);
+        // console.log(query);
         let result = await res.app.mysql.query(query, [name, name + '%']);
 
         let response = [];
