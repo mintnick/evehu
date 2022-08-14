@@ -24,21 +24,18 @@ let init = [
 
 // {filename : seconds}
 let tasks = {
-    // 'get_old_entities_char.js': 1,
-    'get_old_characters.js': 1,
-    // 'get_characters.js': 1,
-    // 'get_corporations.js': 1,
-    // 'get_alliances.js': 3600, // 1 hours
+    'get_old_entities_char.js': 1,
+    // 'get_old_characters.js': 1, // finished
+    'get_characters.js': 1,
+    'get_corporations.js': 600,
+    'get_alliances.js': 3600,
 
-    // 'update_characters.js': 300, // 5 min
-    // 'update_corporations.js': 3600, // 1 hr
-    // 'update_alliances.js': 3600, // 1 hr
+    'update_characters.js': 1,
+    'update_corporations.js': 1800,
+    'update_alliances.js': 3600,
 
-    // 'update_corporation_history.js': 1,
-    // 'update_alliance_history.js': 1,
-    // 'update_delta.js': 10800, // 3 hr (4am - 8am)
-
-    // 'update_redis_home.js': 3600, // 1 hour
+    'update_delta.js': 14400, // (4am - 8am)
+    'update_redis_home.js': 3600,
 }
 
 function initialize() {

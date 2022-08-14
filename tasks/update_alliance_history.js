@@ -1,3 +1,5 @@
+// not in use
+
 const esi = require('../models/esi.js');
 const corporations = require('../models/corporations.js');
 
