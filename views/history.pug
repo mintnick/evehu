@@ -1,6 +1,6 @@
 
 mixin history(type, members, join, left, history)
-  ul.nav.nav-tabs#history-nav(role='tablist')
+  ul.nav.nav-tabs.nav-fill#history-nav(role='tablist')
     if type != 'character'
       if type == 'alliance'
         - var link = '/corporation/';

@@ -16,11 +16,12 @@ module.exports = async function (app) {
             '(last_update is NULL or last_update < (NOW() - INTERVAL 3 DAY)) '+
             'limit 1000');
     ids = ids.map(id => id.corporation_id);
+    await updateCorp(app, ids);
 
     // let ids = await app.mysql.query(
-    //     'select corporation_id from corporations where alliance_id = 562593865'
+    //     'select corporation_id from corporations where alliance_id = 99000373'
     // );
-    await updateCorp(app, ids);
+    // await updateCorp(app, ids);
 };
 
 async function updateCorp(app, ids) {

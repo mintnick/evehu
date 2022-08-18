@@ -6,8 +6,9 @@ module.exports = async function (req, res) {
 
     // details
     const details = await req.app.mysql.query('select * from alliances where alliance_id = ?', [alli_id]);
-    console.log(alli_id);
     if (details.length == 0) return;
+    await req.app.mysql.query('update alliances set is_active = 1 where alliance_id = ?', [alli_id]);
+
     data.details = details[0];
     const t = (data.details.date_founded).toLocaleDateString("zh").split('/');
     data.details.date_founded = `${t[0]}年 ${t[1]}月 ${t[2]}日`;

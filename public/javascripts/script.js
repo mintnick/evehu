@@ -17,6 +17,7 @@ $(document).ready(function() {
         searching: false,
         bLengthChange: false,
         info: false,
+        pageLength: 20,
         language: {
             info: "第 _PAGE_ 页(共 _PAGES_ 页)",
             paginate: {
