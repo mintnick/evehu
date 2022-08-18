@@ -50,9 +50,9 @@ table tr > td.image {
   white-space: nowrap;
 }
 
-table .align-center {
+/* table .align-center {
   text-align: center;
-}
+} */
 
 table .join {
   color:chartreuse;
@@ -86,3 +86,12 @@ table td.detail-cell {
 .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
 .autocomplete-group { padding: 10px 10px 0; font-weight: bold; font-size: 1.2em; color: gold;}
 .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+
+/* Datatables */
+/* div.dataTables_info {
+  color: white !important;
+}
+
+div.dataTables_paginate a.paginate_button {
+  color: white !important;
+} */

@@ -1,0 +1,44 @@
+include image.pug
+include kb_cell.pug
+
+mixin details(details, type, id)
+  span.float-left.table.responsive
+    table.table.table-bordered.table-dark.align-middle.fixed-table.text-center
+      tr
+        td
+          +image(type, id, 256)
+        td.detail-cell
+          h3= title
+          h4 [#{details.ticker}]
+          br
+          if type == 'alliance'
+            h5 创始公司&nbsp&nbsp
+              br
+              a(href='/corporation/'+creator_corp.corporation_id)= creator_corp.name
+            br
+            h5 执行公司&nbsp&nbsp
+              br
+              a(href='/corporation/'+exec_corp.corporation_id)= exec_corp.name
+      if type == 'alliance'
+        tr
+          td
+            h5 公司数量
+          td
+            h5= details.corp_count
+      if type == 'alliance' || type == 'corporation'
+        tr
+          td
+            h5 角色数量
+          td
+            h5= details.member_count
+        tr 
+          td
+            h5 7日内成员波动
+          td
+            h5= details.diff_7days
+      tr
+        td
+          h5 创建时间
+        td
+          h6= details.date_founded
+      +kb(type, details.alliance_id)

@@ -54,11 +54,11 @@ exports.get = async function (app, corp_id) {
 
 exports.updateHistory = async function (app, corp_id, data) {
     try {
-        data = data.reverse();
         let i = 0;
         const last_record_id = data[0].record_id;
         const check = await app.mysql.query('select * from alliance_history where record_id = ? ', [last_record_id]);
         if (check.length == 0) {
+            data = data.reverse();
             while (i < data.length - 1) {
                 // sometimes corp quit alliance will generate two identical records
                 if (data[i]['starte_date'] === data[i+1]['start_date']) continue;
@@ -83,8 +83,8 @@ exports.updateHistory = async function (app, corp_id, data) {
             const alliance_id = data[i]['alliance_id'] ?? null;
             start_date = await isoToMysql(start_date);
             let result = await app.mysql.query(
-                'insert ignore into corporation_history '+
-                '(record_id, character_id, corporation_id, start_date) '+
+                'insert ignore into alliance_history '+
+                '(record_id, corporation_id, alliance_id, start_date) '+
                 'values (?, ?, ?, ?)',
                 [record_id, corp_id, alliance_id, start_date]
                 )

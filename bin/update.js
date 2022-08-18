@@ -24,18 +24,18 @@ let init = [
 
 // {filename : seconds}
 let tasks = {
-    'get_old_entities_char.js': 1,
+    // 'get_old_entities_char.js': 1,
     // 'get_old_characters.js': 1, // finished
-    'get_characters.js': 300,
-    'get_corporations.js': 600,
-    'get_alliances.js': 3600,
+    // 'get_characters.js': 300,
+    // 'get_corporations.js': 600,
+    // 'get_alliances.js': 3600,
 
-    'update_characters.js': 1,
-    'update_corporations.js': 600,
-    'update_alliances.js': 3600,
+    // 'update_characters.js': 1,
+    'update_corporations.js': 1,
+    // 'update_alliances.js': 3600,
 
-    'update_delta.js': 14400, // (4am - 8am)
-    'update_redis_home.js': 3600,
+    // 'update_delta.js': 14400, // (4am - 8am)
+    // 'update_redis_home.js': 3600,
 }
 
 function initialize() {
@@ -71,7 +71,7 @@ async function update(app, tasks) {
         }
     }
 
-    if (app.debug == false) update(app, tasks);
+    // if (app.debug == false) update(app, tasks);
 }
 
 async function clearRunKeys(app) {

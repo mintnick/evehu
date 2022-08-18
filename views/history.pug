@@ -1,0 +1,35 @@
+
+mixin history(type, members, join, left, history)
+  ul.nav.nav-tabs#history-nav(role='tablist')
+    if type != 'character'
+      if type == 'alliance'
+        - var link = '/corporation/';
+        - var title = '公司';
+      if type == 'corporation'
+        - var link = '/character/';
+        - var title = '成员';
+      li.nav-item(role='presentation')
+        button.nav-link.active#member-tab(data-bs-toggle="tab", data-bs-target="#member", type="button", role="tab", aria-controls="member", aria-selected="true")=title
+      li.nav-item(role='presentation')
+          button.nav-link#join-tab(data-bs-toggle="tab", data-bs-target="#join", type="button", role="tab", aria-controls="join", aria-selected="true") 加入
+      li.nav-item(role='presentation')
+          button.nav-link#leave-tab(data-bs-toggle="tab", data-bs-target="#leave", type="button", role="tab", aria-controls="leave", aria-selected="true") 离开
+  div.tab-content#history-nav-content
+    div.tab-pane.fade.show.active#member(role="tabpanel", aria-labeledby="member-tab")
+      table.datatables.table.table-bordered.table-dark
+        thead
+          tr
+            th 名称
+            th 成员数
+            th 7日成员浮动
+        tbody
+          each val in members
+            tr
+              td
+                a(href= link+val.id)= val.name
+              td.text-center= val.member_count
+              td.text-center= val.diff_7days
+    div.tab-pane.fade#join(role="tabpanel", aria-labeledby="join-tab")
+      p hello
+    div.tab-pane.fade#leave(role="tabpanel", aria-labeledby="leave-tab")
+      p hi

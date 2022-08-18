@@ -10,6 +10,13 @@ module.exports = async function (app) {
     );
     await updateChar(app, ids);
 
+    // ids = await app.mysql.query(
+    //     'select character_id from characters ' +
+    //     'where history_update is NULL ' +
+    //     'limit 100'
+    // );
+    // await updateChar(app, ids);
+
     ids = await app.mysql.query(
         'select character_id from characters '+
         'where '+

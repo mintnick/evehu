@@ -3,12 +3,18 @@ const utf8 = require('utf8');
 module.exports = async function (req, res) {
     const alli_id = req.params.id;
     const data = {};
-    const details = await req.app.mysql.query('select * from alliances where alliance_id = ?', [alli_id]);
-    if (details.length == 0) return;
 
+    // details
+    const details = await req.app.mysql.query('select * from alliances where alliance_id = ?', [alli_id]);
+    console.log(alli_id);
+    if (details.length == 0) return;
     data.details = details[0];
     const t = (data.details.date_founded).toLocaleDateString("zh").split('/');
-    data.details.date_founded = `${t[0]}年 ${t[1]}月 ${t[2]}日`
+    data.details.date_founded = `${t[0]}年 ${t[1]}月 ${t[2]}日`;
+    // title
+    data.title = data.details.name;
+
+    // corps
     data.corporations = await req.app.mysql.query(
         'select corporation_id id, name, member_count, diff_7days ' + 
         'from corporations where alliance_id = ? order by name',
@@ -30,12 +36,16 @@ module.exports = async function (req, res) {
         if (creator_corp.length) data.creator_corp = creator_corp[0];
     }
 
-    data.history = await req.app.mysql.query(
-        'select * from alliance_history where alliance_id = ?',
-        [data.alli_id]
-    );
+    // history
 
-    data.title = data.details.name;
-    // console.log(data);
+    // data.join = await req.app.mysql.query(
+    //     'select distinct() '
+    // );
+    // data.history = await req.app.mysql.query(
+    //     'select * from alliance_history where alliance_id = ?',
+    //     [alli_id]
+    // );
+
+    // console.log(data.corporations);
     return data;
 }
