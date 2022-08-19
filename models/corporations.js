@@ -55,7 +55,7 @@ exports.get = async function (app, corp_id) {
 exports.updateHistory = async function (app, corp_id, data) {
     try {
         let i = 0;
-        const last_record_id = data[0].record_id;
+        const last_record_id = data[i].record_id;
         const check = await app.mysql.query('select * from alliance_history where record_id = ? ', [last_record_id]);
         if (check.length == 0) {
             data = data.reverse();

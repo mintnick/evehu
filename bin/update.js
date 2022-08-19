@@ -26,16 +26,16 @@ let init = [
 let tasks = {
     'get_old_entities_char.js': 1,
     // 'get_old_characters.js': 1, // finished
-    // 'get_characters.js': 300,
-    // 'get_corporations.js': 600,
-    // 'get_alliances.js': 3600,
+    'get_characters.js': 1,
+    'get_corporations.js': 600,
+    'get_alliances.js': 3600,
 
-    // 'update_characters.js': 1,
-    // 'update_corporations.js': 600,
-    // 'update_alliances.js': 3600,
+    'update_characters.js': 1,
+    'update_corporations.js': 600,
+    'update_alliances.js': 3600,
 
-    // 'update_delta.js': 14400, // (4am - 8am)
-    // 'update_redis_home.js': 3600,
+    'update_delta.js': 10800, // (4am - 8am)
+    'update_redis_home.js': 3600,
 }
 
 function initialize() {
@@ -63,15 +63,15 @@ async function update(app, tasks) {
         const runKey = 'crinstance:running:' + task;
 
         if (await app.redis.get(curKey) != 'true' && await app.redis.get(runKey) != 'true') {
-            await app.redis.setex(curKey, interval || 300, 'true');
-            await app.redis.setex(runKey, 300, 'true');
+            await app.redis.setex(curKey, interval || 600, 'true');
+            await app.redis.setex(runKey, 600, 'true');
 
             const func = require('../tasks/' + task);
             setTimeout(() => {runTask(task, func, app, runKey); }, 1);
         }
     }
 
-    // if (app.debug == false) update(app, tasks);
+    if (app.debug == false) update(app, tasks);
 }
 
 async function clearRunKeys(app) {

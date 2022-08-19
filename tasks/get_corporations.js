@@ -13,7 +13,7 @@ module.exports = async function (app) {
         let id = await app.mysql.queryField('corp_id', 'select max(corporation_id) corp_id from corporations where corporation_id > 98000000 and corporation_id < 99000000');
         id = id ?? 98000000;
         // let id = parseInt(fs.readFileSync(path).toString());
-        const next = id + 5;
+        const next = id + 3;
         while (id < 98200000 && id < next) {
             // const result = app.mysql.query('select * from corporations where corporation_id = ?', [id]);
             // if (result.length > 0) continue;
@@ -34,7 +34,7 @@ async function getUndefinedCorps (app) {
         'select corporation_id corp_id from corporation_history c ' + 
         'where c.corporation_id not in ' + 
         '(select corporation_id from corporations) ' +
-        'limit 10'
+        'limit 100'
         );
     // console.log(corp_ids);
     if (corp_ids.length > 0) {

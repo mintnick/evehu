@@ -21,7 +21,7 @@ module.exports = async function (app) {
         'select character_id from characters '+
         'where '+
         '(last_update is NULL or last_update < (NOW() - INTERVAL 7 DAY)) '+
-        'limit 100');
+        'limit 10000');
     await updateChar(app, ids);
 
     // testing

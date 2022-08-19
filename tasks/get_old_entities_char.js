@@ -16,19 +16,7 @@ module.exports = async function f(app) {
             
             let data = await esi(app, 'char', id);
             if (data != undefined) characters.add(app, id, data);
-
-            // data = await esi(app, 'corp', id);
-            // if (data != undefined) {
-            //     corporations.add(app, id, data);
-            //     continue;
-            // }
-
-            // data = await esi(app, 'alli', id);
-            // if (data) {
-            //     alliances.add(app, id, data);
-            // }
         }
-        // // console.log('max old entity id: ' + id);
         fs.writeFileSync(path, id.toString());
 
         // let id = 102149490;

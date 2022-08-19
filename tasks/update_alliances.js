@@ -6,7 +6,7 @@ module.exports = async function (app) {
         'select alliance_id from alliances ' +
         'where is_deleted != 1 and ' + 
         'is_active = 1 and ' +
-        '(last_update is NULL or last_update < NOW() - INTERVAL 6 HOUR) ' +
+        'last_update < NOW() - INTERVAL 1 DAY ' +
         'limit 100'
     );
     await updateAllis(app, ids);
@@ -14,7 +14,7 @@ module.exports = async function (app) {
     ids = await app.mysql.query(
         'select alliance_id from alliances '+
         'where is_deleted != 1 and '+
-        '(last_update is NULL or last_update < (NOW() - INTERVAL 1 DAY)) '+
+        'last_update < (NOW() - INTERVAL 1 DAY) '+
         'limit 100');
     await updateAllis(app, ids);
 };
