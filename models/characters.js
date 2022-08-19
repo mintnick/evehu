@@ -1,3 +1,4 @@
+const esi = require('../models/esi.js');
 
 async function formatData(data) {
     if (data['alliance_id'] === undefined) data['alliance_id'] = null;
@@ -21,6 +22,9 @@ exports.add = async function (app, char_id, data) {
             [char_id, alliance_id, corporation_id, name, birthday, security_status, faction_id]
         );
         // if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
+
+        data = await esi(app, 'char', char_id + '/corporationhistory');
+        if (data.length > 0) await updateHistory(app, char_id, data);
     } catch (e) {
         console.log(e);
     }
