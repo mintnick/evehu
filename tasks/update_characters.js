@@ -5,22 +5,22 @@ module.exports = async function (app) {
     let ids = await app.mysql.query(
         'select character_id from characters ' +
         'where is_active = 1 and ' +
-        '(last_update < (NOW() - INTERVAL 1 DAY)) ' +
+        'last_update < (NOW() - INTERVAL 1 DAY) ' +
         'limit 100'
     );
     await updateChar(app, ids);
 
-    // ids = await app.mysql.query(
-    //     'select character_id from characters ' +
-    //     'where history_update is NULL ' +
-    //     'limit 100'
-    // );
-    // await updateChar(app, ids);
+    ids = await app.mysql.query(
+        'select character_id from characters ' +
+        'where history_update is NULL ' +
+        'limit 1000'
+    );
+    await updateChar(app, ids);
 
     ids = await app.mysql.query(
         'select character_id from characters '+
         'where '+
-        '(last_update is NULL or last_update < (NOW() - INTERVAL 7 DAY)) '+
+        'last_update < (NOW() - INTERVAL 7 DAY) '+
         'limit 10000');
     await updateChar(app, ids);
 
