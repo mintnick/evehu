@@ -22,11 +22,11 @@ exports.add = async function (app, corp_id, data) {
             'values(?, ?, ?, ? ,?, ?, ?, ? ,?, NOW())',
             [corp_id, alliance_id, ceo_id, creator_id, date_founded, member_count, name, ticker, is_deleted]
         );
-        if (result.affectedRows == 1) console.log('Corp ' + corp_id + ' added');
+        // if (result.affectedRows == 1) console.log('Corp ' + corp_id + ' added');
     } catch (e) {
         console.log(e);
     }
-}
+};
 
 exports.update = async function (app, corp_id, data) {
     try {
@@ -38,19 +38,11 @@ exports.update = async function (app, corp_id, data) {
             'where corporation_id = ?',
             [alliance_id, ceo_id, member_count, is_deleted, corp_id]
         );
-        if (result.affectedRows == 1) console.log('Corp ' + corp_id + ' updated');
+        // if (result.affectedRows == 1) console.log('Corp ' + corp_id + ' updated');
     } catch (e) {
         console.log(e);
     }
-}
-
-exports.get = async function (app, corp_id) {
-    try {
-        return app.mysql.queryRow('select * from corporations where corporation_id = ?', [corp_id]);
-    } catch (e) {
-        console.log(e);
-    }
-}
+};
 
 exports.updateHistory = async function (app, corp_id, data) {
     try {
@@ -88,7 +80,7 @@ exports.updateHistory = async function (app, corp_id, data) {
                 'values (?, ?, ?, ?)',
                 [record_id, corp_id, alliance_id, start_date]
                 )
-            if (result.affectedRows == 1) console.log(`Corp ${corp_id} history updated`);
+            // if (result.affectedRows == 1) console.log(`Corp ${corp_id} history updated`);
         }
         await app.mysql.query(
             'update corporations set history_update = NOW() where corporation_id = ?',
@@ -97,4 +89,4 @@ exports.updateHistory = async function (app, corp_id, data) {
     } catch (e) {
         console.log(e);
     }
-}
+};

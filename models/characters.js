@@ -20,11 +20,11 @@ exports.add = async function (app, char_id, data) {
             'values(?, ?, ?, ?, ?, ?, ?, NOW())',
             [char_id, alliance_id, corporation_id, name, birthday, security_status, faction_id]
         );
-        if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
+        // if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
     } catch (e) {
         console.log(e);
     }
-}
+};
 
 exports.update = async function (app, char_id, data) {
     try {
@@ -36,11 +36,11 @@ exports.update = async function (app, char_id, data) {
             'where character_id = ?',
             [alliance_id, corporation_id, security_status, faction_id, char_id]
         );
-        if (result.affectedRows == 1) console.log('Char ' + char_id + ' updated');
+        // if (result.affectedRows == 1) console.log('Char ' + char_id + ' updated');
     } catch (e) {
         console.log(e);
     }
-}
+};
 
 exports.updateHistory = async function (app, char_id, data) {
     try {
@@ -76,7 +76,7 @@ exports.updateHistory = async function (app, char_id, data) {
                 'values (?, ?, ?, ?)',
                 [record_id, char_id, corporation_id, start_date]
                 )
-            if (result.affectedRows == 1) console.log(`Char ${char_id} history updated`);
+            // if (result.affectedRows == 1) console.log(`Char ${char_id} history updated`);
         }
 
         await app.mysql.query(
@@ -86,4 +86,4 @@ exports.updateHistory = async function (app, char_id, data) {
     } catch (e) {
         console.log(e);
     }
-}
+};

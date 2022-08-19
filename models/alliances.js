@@ -3,7 +3,7 @@ async function formatData(data) {
     data['date_founded'] = data['date_founded'].replace('T', ' ').slice(0, 19);
 
     return data;
-}
+};
 
 exports.add = async function (app, alli_id, data) {
     try {
@@ -16,11 +16,11 @@ exports.add = async function (app, alli_id, data) {
             'values (?, ?, ?, ?, ?, ?, ?, NOW())',
             [alli_id, creator_corporation_id, creator_id, executor_corporation_id, date_founded, name, ticker]
         )
-        if (result.affectedRows == 1) console.log('Alli ' + alli_id + ' inserted');
+        // if (result.affectedRows == 1) console.log('Alli ' + alli_id + ' added');
     } catch (e) {
         console.log(e);
     }
-}
+};
 
 exports.update = async function (app, alli_id, data) {
     try {
@@ -30,16 +30,8 @@ exports.update = async function (app, alli_id, data) {
             'update alliances set executor_corporation_id = ?, member_count = ?, last_update = NOW(), is_deleted = ? where alliance_id = ?',
             [executor_corporation_id, member_count, is_deleted, alli_id]
         );
-        if (result.affectedRows == 1) console.log('Alli ' + alli_id + ' updated');
+        // if (result.affectedRows == 1) console.log('Alli ' + alli_id + ' updated');
     } catch (e) {
         console.log(e);
     }
-}
-
-exports.get = async function (app, alli_id) {
-    try {
-        return await app.mysql.queryRow('select * from alliances where alliance_id = ?', [alli_id]);
-    } catch (e) {
-        console.log(e);
-    }
-}
+};

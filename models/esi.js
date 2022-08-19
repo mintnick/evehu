@@ -22,4 +22,4 @@ module.exports = async function (app, type, id) {
         return JSON.parse(res.body);
     }
     // console.log(res);
-}
+};
