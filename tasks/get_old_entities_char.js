@@ -2,8 +2,6 @@
 
 const esi = require('../models/esi.js');
 const characters = require('../models/characters.js');
-const corporations = require('../models/corporations.js');
-const alliances = require('../models/alliances.js');
 const fs = require('fs');
 
 const path = __dirname + '/../max_ids/old_entity_id'
@@ -25,4 +23,4 @@ module.exports = async function f(app) {
     } catch (e) {
         console.log(e);
     }
-}
+};

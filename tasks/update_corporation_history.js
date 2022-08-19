@@ -19,4 +19,4 @@ module.exports = async function(app) {
     } catch (e) {
         console.log(e);
     }
-}
+};

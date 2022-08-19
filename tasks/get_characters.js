@@ -5,7 +5,7 @@ const characters = require('../models/characters.js');
 const fs = require('fs');
 
 const max_id = 2114000000;
-const path = __dirname + '/../max_ids/char_id'
+const path = __dirname + '/../max_ids/char_id';
 
 module.exports = async function (app) {
     try {

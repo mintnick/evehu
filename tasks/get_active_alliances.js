@@ -1,6 +1,5 @@
 const esi = require('../models/esi.js');
 const alliances = require('../models/alliances.js');
-const corporations = require('../models/corporations.js');
 
 module.exports = async function (app) {
     try {

@@ -27,7 +27,7 @@ module.exports = async function (app) {
     } catch (e) {
         console.log(e);
     }
-}
+};
 
 async function getUndefinedCorps (app) {
     let corp_ids = await app.mysql.query(

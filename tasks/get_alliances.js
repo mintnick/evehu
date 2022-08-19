@@ -28,7 +28,7 @@ async function getUndefinedAlli(app) {
         'select alliance_id alli_id from alliance_history a ' + 
         'where a.alliance_id not in ' + 
         '(select alliance_id from alliances) ' +
-        'limit 20'
+        'limit 100'
         );
     // console.log(corp_ids);
     if (alli_ids.length > 0) {

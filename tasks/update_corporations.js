@@ -32,7 +32,7 @@ async function updateCorp(app, ids) {
 
         if (id > 98000000) {
             data = await esi(app, 'corp', id + '/alliancehistory');
-        if (data) await corporations.updateHistory(app, id, data);
+            if (data) await corporations.updateHistory(app, id, data);
         }
     }
 }

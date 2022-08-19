@@ -1,4 +1,3 @@
-
 async function formatData(data) {
     data['date_founded'] = (data['date_founded'])?
         data['date_founded'].replace('T', ' ').slice(0, 19) : null;
