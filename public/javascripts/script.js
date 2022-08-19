@@ -17,9 +17,9 @@ $(document).ready(function() {
         searching: false,
         bLengthChange: false,
         info: false,
-        pageLength: 20,
+        pageLength: 15,
         language: {
-            info: "第 _PAGE_ 页(共 _PAGES_ 页)",
+            info: "雇佣记录上限500条",
             paginate: {
                 "next": "下一页",
                 "previous": "上一页",
@@ -27,5 +27,6 @@ $(document).ready(function() {
                 "last": "最后一页",
             }
         },
+        order: [],
     });
 });

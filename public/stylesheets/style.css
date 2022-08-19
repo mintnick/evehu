@@ -1,5 +1,7 @@
 html {
   font-size: 16px;
+  --join: rgb(93, 151, 36);
+  --leave: chocolate;
 }
 
 body {
@@ -54,12 +56,24 @@ table tr > td.image {
   text-align: center;
 } */
 
-table .join {
-  color:chartreuse;
+.join {
+  color: var(--join);
+}
+.join.active{
+  color:var(--join) !important;
+}
+.join:hover{
+  color:var(--join) !important;
 }
 
-table .leave {
-  color:chocolate;
+.leave {
+  color: var(--leave);
+}
+.leave.active {
+  color: var(--leave) !important;
+}
+.leave.hover {
+  color: var(--leave) !important;
 }
 
 h2.title {
@@ -70,14 +84,9 @@ h2.title {
   padding: .2em .2em;
 }
 
-table.fixed-table {
-  table-layout: fixed;
-  width: 500px;
-}
-
-table td.detail-cell {
+/* table td.detail-cell {
   width: 230px;
-}
+} */
 
 /* auto-complete */
 .autocomplete-suggestions { border: 1px solid #999; background: rgb(33,37,41); overflow: auto; }

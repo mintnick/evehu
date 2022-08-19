@@ -3,29 +3,58 @@ include kb_cell.pug
 
 mixin details(details, type, id)
   span.float-left.table.responsive
-    table.table.table-bordered.table-dark.align-middle.fixed-table.text-center
+    table.table.table-bordered.table-dark.align-middle.text-center
       tr
         td
-          +image(type, id, 256)
-        td.detail-cell
+          +image(type, id, 128)
+        td
           h3= title
-          h4 [#{details.ticker}]
+
+          if type == 'alliance' || type == 'corporation'
+            h4 [#{details.ticker}]
           br
-          if type == 'alliance'
-            h5 创始公司&nbsp&nbsp
-              br
-              a(href='/corporation/'+creator_corp.corporation_id)= creator_corp.name
-            br
-            h5 执行公司&nbsp&nbsp
-              br
-              a(href='/corporation/'+exec_corp.corporation_id)= exec_corp.name
+
+          if type == 'character' && details.corporation_id != null
+            .row
+              .col-4
+                +image('corporation', details.corporation_id, 64)
+              .col-8.d-flex.flex-column.justify-content-center
+                .div
+                  a(href='/corporation/'+details.corporation_id)= details.corp_name
+
+          if type != 'alliance' && details.alliance_id != null
+            .row
+              .col-4
+                +image('alliance', details.alliance_id, 64)
+              .col-8.d-flex.flex-column.justify-content-center
+                .div
+                  a(href='/alliance/'+details.alliance_id)= details.alli_name
+
       if type == 'alliance'
+        tr
+          td
+            h5 创始公司
+          td
+            h5
+              a(href='/corporation/'+creator_corp.corporation_id)= creator_corp.name
+        tr
+          td
+            h5 执行公司
+          td
+            h5
+              a(href='/corporation/'+exec_corp.corporation_id)= exec_corp.name
         tr
           td
             h5 公司数量
           td
             h5= details.corp_count
       if type == 'alliance' || type == 'corporation'
+        tr
+          td
+            h5 创始人
+          td
+            h5
+              a(href='/character/'+creator.id)= creator.name
         tr
           td
             h5 角色数量
@@ -36,6 +65,12 @@ mixin details(details, type, id)
             h5 7日内成员波动
           td
             h5= details.diff_7days
+      if type == 'character'
+        tr
+          td 
+            h5 安全等级
+          td
+            h5 #{details.security_status}
       tr
         td
           h5 创建时间

@@ -1,6 +1,8 @@
 mixin kb(type, id)
   if (type != undefined)
-  tr
-      td.align-center(colspan=2)
-        h5
-          a(href='https://beta.ceve-market.org/'+type+'/'+id+'/kill' target='_blank') KB链接
+    if type == 'character'
+      - type = 'pilot'
+      tr
+          td.align-center(colspan=2)
+            h5
+              a(href='https://beta.ceve-market.org/'+type+'/'+id+'/kill' target='_blank') KB链接

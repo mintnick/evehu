@@ -1,0 +1,16 @@
+
+mixin char_history(history)
+  h4 雇佣记录
+  table.datatables.table.table-bordered.table-dark
+    thead
+      tr
+        td 公司
+        td.join 加入时间
+        td.leave 离开时间
+    tbody
+      each val in history
+        tr
+          td
+            a(href='/corporation/'+val.id)= val.name
+          td.text-center= val.start_date
+          td.text-center= val.end_date

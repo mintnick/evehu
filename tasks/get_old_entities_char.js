@@ -28,8 +28,12 @@ module.exports = async function f(app) {
             //     alliances.add(app, id, data);
             // }
         }
-        // console.log('max old entity id: ' + id);
+        // // console.log('max old entity id: ' + id);
         fs.writeFileSync(path, id.toString());
+
+        // let id = 102149490;
+        // let data = await esi(app, 'char', id);
+        // if (data != undefined) characters.add(app, id, data);
     } catch (e) {
         console.log(e);
     }

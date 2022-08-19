@@ -4,7 +4,7 @@ include history.pug
 
 block content
   div.row.mt-5
-    div.col
-      +details(details, 'alliance', details.alliance_id)
-    div.col
-      +history('alliance', corporations, null, null)
+    div.col-5
+      +details(details, 'alliance', id)
+    div.col-7
+      +history('alliance', corporations, join, left)

@@ -23,6 +23,13 @@ module.exports = async function (app) {
         '(last_update is NULL or last_update < (NOW() - INTERVAL 7 DAY)) '+
         'limit 100');
     await updateChar(app, ids);
+
+    // testing
+    // let ids = await app.mysql.query(
+    //     'select character_id from characters ' +
+    //     'where corporation_id = 818701407 '
+    // );
+    // await updateChar(app, ids);
 };
 
 async function updateChar(app, ids) {

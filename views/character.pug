@@ -1,1 +1,10 @@
-p id: #{id}
+extends layout
+include details.pug
+include char_history.pug
+
+block content
+  .row.mt-5
+    .col-5
+      +details(details, 'character', id)
+    .col-7
+      +char_history(history)

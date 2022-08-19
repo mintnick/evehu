@@ -1,0 +1,10 @@
+extends layout
+include details.pug
+include history.pug
+
+block content
+  .row.mt-5
+    .col-5
+      +details(details, 'corporation', id)
+    .col-7
+      +history('corporation', characters, null, left)

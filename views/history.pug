@@ -1,35 +1,80 @@
 
 mixin history(type, members, join, left, history)
   ul.nav.nav-tabs.nav-fill#history-nav(role='tablist')
-    if type != 'character'
-      if type == 'alliance'
-        - var link = '/corporation/';
-        - var title = '公司';
-      if type == 'corporation'
-        - var link = '/character/';
-        - var title = '成员';
+    if type == 'alliance'
+      - var link = '/corporation/';
+      - var title = '公司';
+    else if type == 'corporation'
+      - var link = '/character/';
+      - var title = '成员';
+    
+
+    li.nav-item(role='presentation')
+      button.nav-link.active#member-tab(data-bs-toggle="tab", data-bs-target="#member", type="button", role="tab", aria-controls="member", aria-selected="true") 当前#{title}
+
+    if type == 'alliance'
       li.nav-item(role='presentation')
-        button.nav-link.active#member-tab(data-bs-toggle="tab", data-bs-target="#member", type="button", role="tab", aria-controls="member", aria-selected="true")=title
-      li.nav-item(role='presentation')
-          button.nav-link#join-tab(data-bs-toggle="tab", data-bs-target="#join", type="button", role="tab", aria-controls="join", aria-selected="true") 加入
-      li.nav-item(role='presentation')
-          button.nav-link#leave-tab(data-bs-toggle="tab", data-bs-target="#leave", type="button", role="tab", aria-controls="leave", aria-selected="true") 离开
+          button.nav-link.join#join-tab(data-bs-toggle="tab", data-bs-target="#join", type="button", role="tab", aria-controls="join", aria-selected="true") #{title}加入
+
+    li.nav-item(role='presentation')
+        button.nav-link.leave#leave-tab(data-bs-toggle="tab", data-bs-target="#leave", type="button", role="tab", aria-controls="leave", aria-selected="true") #{title}离开
+
   div.tab-content#history-nav-content
-    div.tab-pane.fade.show.active#member(role="tabpanel", aria-labeledby="member-tab")
-      table.datatables.table.table-bordered.table-dark
-        thead
-          tr
-            th 名称
-            th 成员数
-            th 7日成员浮动
-        tbody
-          each val in members
+    if type == 'alliance'
+      div.tab-pane.fade.show.active#member(role="tabpanel", aria-labeledby="member-tab")
+        table.datatables.table.table-bordered.table-dark
+          thead
             tr
-              td
-                a(href= link+val.id)= val.name
-              td.text-center= val.member_count
-              td.text-center= val.diff_7days
-    div.tab-pane.fade#join(role="tabpanel", aria-labeledby="join-tab")
-      p hello
+              th 名称
+              th 成员数
+              th 7日成员浮动
+          tbody
+            each val in members
+              tr
+                td
+                  a(href= link+val.id)= val.name
+                td.text-center= val.member_count
+                td.text-center= val.diff_7days
+    
+      div.tab-pane.fade#join(role="tabpanel", aria-labeledby="join-tab")
+        if join != null
+          table.datatables.table.table-bordered.table-dark
+            thead
+              tr
+                th 名称
+                th 加入时间
+            tbody
+              each val in join
+                tr
+                  td(style="width: 60%")
+                    a(href= link+val.id)= val.name
+                  td.text-center= val.start_date
+    else if type == 'corporation'
+      div.tab-pane.fade.show.active#member(role="tabpanel", aria-labeledby="member-tab")
+        table.datatables.table.table-bordered.table-dark
+          thead
+            tr
+              th 角色名
+              th 加入时间
+          tbody
+            each val in members
+              tr
+                td
+                  a(href= link+val.id)= val.name
+                td.text-center= val.start_date
+    
     div.tab-pane.fade#leave(role="tabpanel", aria-labeledby="leave-tab")
-      p hi
+      if left != null
+        table.datatables.table.table-bordered.table-dark
+          thead
+            tr
+              th 名称
+              th 加入时间
+              th 离开时间
+          tbody
+            each val in left
+              tr
+                td(style="width: 40%")
+                  a(href= link+val.id)= val.name
+                td.text-center= val.start_date
+                td.text-center= val.end_date
