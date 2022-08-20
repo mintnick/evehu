@@ -1,6 +1,8 @@
 include image.pug
 
 mixin new(title, contents, type)
+  if type == 'alliance' || type == 'corporation'
+    - var show_mc = true;
   div.table-responsive
     h5 #{title}&nbsp&nbsp
       img(src='/images/new.svg', width= 30, height= 30, alt='').lazy
@@ -8,14 +10,18 @@ mixin new(title, contents, type)
       thead.thead-light
         tr
           th.image
-          th.align-center.name 名称
-          th.align-center.number 起始时间
+          th.align-center 名称
+          th.align-center 起始时间
+          if show_mc
+            th.align-center 角色数
       tbody
         if contents != undefined
           each row in contents
             tr
               td.image
                 +image(type, row.id, 48, row.name)
-              td.name
+              td
                 a(href='/' + type + '/' + row.id)= row.name
-              td.text-center.number= row.birthday
+              td.text-center= row.birthday
+              if show_mc
+                td.text-center= row.member_count

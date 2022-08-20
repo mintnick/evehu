@@ -8,21 +8,17 @@ mixin moving_char(title, contents, type)
       thead.thead-light
         tr
           th.image
-          th.text-center.name 角色名
-          th.text-center.name 加入/离开
-          th.text-center 公司
+          th.text-center 角色名
+          th.text-center 加入公司
+          th.text-center 时间
       tbody
         if contents != undefined
           each row in contents
             tr
               td.image
                 +image(type, row.ch_id, 48, row.ch_name)
-              td.name
+              td
                 a(href='/' + type + '/' + row.ch_id)= row.ch_name
-              if row.end_date == null
-                td.text-center.join 加入
-              else
-                td.text-center.leave 离开
-              //- td.align-center= (row.end_date == null ? '加入' : '离开')
               td.text-center
                 a(href='/corporation/' + row.c_id)= row.c_name
+              td.text-center= row.start_date

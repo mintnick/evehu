@@ -14,16 +14,16 @@ mixin delta(title, contents, type, icon)
       thead.thead-light
         tr
           th.image
-          th.text-center.name 名称
-          th.text-center.number 角色数
-          th.text-center.number 波动
+          th.text-center 名称
+          th.text-center 角色数
+          th.text-center 波动
       tbody
         if contents != undefined
           each row in contents
             tr
               td.image
                 +image(type, row.id, 48, row.name)
-              td.name
+              td
                 a(href='/' + type + '/' + row.id)= row.name
-              td.text-center.number= (row.member_count === null ? 0 : row.member_count)
-              td.text-center.number= (row.diff_7days === null ? 0 : row.diff_7days)
+              td.text-center= (row.member_count === null ? 0 : row.member_count)
+              td.text-center= (row.diff_7days === null ? 0 : row.diff_7days)

@@ -6,7 +6,7 @@ html {
 
 body {
   background-color: #212121;
-  padding: 50px;
+  padding: 30px;
   /* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
   color: #FAFAFA;
   /* font-size: 20px; */
@@ -52,10 +52,6 @@ table tr > td.image {
   white-space: nowrap;
 }
 
-/* table .align-center {
-  text-align: center;
-} */
-
 .join {
   color: var(--join);
 }
@@ -84,10 +80,6 @@ h2.title {
   padding: .2em .2em;
 }
 
-/* table td.detail-cell {
-  width: 230px;
-} */
-
 /* auto-complete */
 .autocomplete-suggestions { border: 1px solid #999; background: rgb(33,37,41); overflow: auto; }
 .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
@@ -96,11 +88,13 @@ h2.title {
 .autocomplete-group { padding: 10px 10px 0; font-weight: bold; font-size: 1.2em; color: gold;}
 .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
 
-/* Datatables */
-/* div.dataTables_info {
-  color: white !important;
+/* Toast */
+.toast {
+  width: 50%;
 }
 
-div.dataTables_paginate a.paginate_button {
-  color: white !important;
-} */
+.toast-body {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
