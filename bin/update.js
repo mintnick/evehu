@@ -36,6 +36,8 @@ let tasks = {
 
     'update_delta.js': 14400, // (4am - 8am)
     'update_redis_home.js': 3600,
+
+    'populate_missing_entities.js': 1,
 };
 
 function initialize() {

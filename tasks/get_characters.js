@@ -2,7 +2,7 @@
 
 const esi = require('../models/esi.js');
 const characters = require('../models/characters.js');
-const fs = require('fs');
+const fs = require('fs/promises');
 
 const max_id = 2120000000;
 const path = __dirname + '/../max_ids/char_id';

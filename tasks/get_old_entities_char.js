@@ -2,12 +2,12 @@
 
 const esi = require('../models/esi.js');
 const characters = require('../models/characters.js');
-const fs = require('fs');
+const fs = require('fs/promises');
 
 const path = __dirname + '/../max_ids/old_entity_id'
 module.exports = async function f(app) {
     try {
-        let id = parseInt(fs.readFileSync(path).toString());
+        let id = parseInt(await fs.readFile(path).toString());
         const next = id + 10;
         while (id < 2100000000 && id < next) {
             id++;
@@ -20,7 +20,7 @@ module.exports = async function f(app) {
                 if (data) await characters.updateHistory(app, id, data);
             }
         }
-        fs.writeFileSync(path, id.toString());
+        await fs.writeFile(path, id.toString());
 
         // let id = 102149490;
         // let data = await esi(app, 'char', id);
