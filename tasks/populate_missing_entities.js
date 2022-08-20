@@ -1,5 +1,6 @@
 const esi = require('../models/esi.js');
 const characters = require('../models/characters.js');
+const updateHistory = require('./update_char_history.js');
 const fs = require('fs/promises');
 
 const path = __dirname + '/../max_ids/old_char_id';
@@ -19,9 +20,7 @@ module.exports = async function (app) {
                 let data = await esi(app, 'char', id);
                 if (data) {
                     await characters.add(app, id, data);
-    
-                    data = await esi(app, 'char', id + '/corporationhistory');
-                    if (data) await characters.updateHistory(app, id, data);
+                    await updateHistory(app, id);
                 }
             }
             id++;

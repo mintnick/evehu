@@ -1,5 +1,3 @@
-// 99,000,000	100,000,000	EVE alliances created after 2010-11-03
-
 const esi = require('../models/esi.js');
 const alliances = require('../models/alliances.js');
 

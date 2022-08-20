@@ -1,5 +1,6 @@
 const esi = require('../models/esi.js');
 const corporations = require('../models/corporations.js');
+const updateHistory = require('./update_corp_history.js');
 
 module.exports = async function (app) {
     let ids = await app.mysql.query(
@@ -28,11 +29,9 @@ async function updateCorp(app, ids) {
     ids = ids.map(id => id.corporation_id);
     for (const id of ids) {
         let data = await esi(app, 'corp', id);
-        if (data) await corporations.update(app, id, data);
-
-        if (id > 98000000) {
-            data = await esi(app, 'corp', id + '/alliancehistory');
-            if (data) await corporations.updateHistory(app, id, data);
+        if (data) {
+            await corporations.update(app, id, data);
+            if (id > 98000000) await updateHistory(app, id);
         }
     }
 }
