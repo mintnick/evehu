@@ -16,7 +16,7 @@ exports.add = async function (app, alli_id, data) {
             'values (?, ?, ?, ?, ?, ?, ?, NOW())',
             [alli_id, creator_corporation_id, creator_id, executor_corporation_id, date_founded, name, ticker]
         )
-        // if (result.affectedRows == 1) console.log('Alli ' + alli_id + ' added');
+        if (result.affectedRows == 1) console.log('Alli ' + alli_id + ' added');
     } catch (e) {
         console.log(e);
     }

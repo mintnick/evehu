@@ -20,7 +20,7 @@ exports.add = async function (app, char_id, data) {
             'values(?, ?, ?, ?, ?, ?, ?, NOW())',
             [char_id, alliance_id, corporation_id, name, birthday, security_status, faction_id]
         );
-        // if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
+        if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
     } catch (e) {
         console.log(e);
     }
