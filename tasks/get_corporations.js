@@ -19,7 +19,12 @@ module.exports = async function (app) {
             // if (result.length > 0) continue;
 
             let data = await esi(app, 'corp', id);
-            if (data) await corporations.add(app, id, data);
+            if (data) {
+                await corporations.add(app, id, data);
+
+                data = await esi(app, 'corp', id + '/alliancehistory');
+                if (data) await corporations.updateHistory(app, id, data);
+            }
             id++;
         }
         // console.log('max corp id: ' + id);
@@ -40,8 +45,13 @@ async function getUndefinedCorps (app) {
     if (corp_ids.length > 0) {
         corp_ids = corp_ids.map(corp => corp.corp_id);
         for (const id of corp_ids) {
-            const data = await esi(app, 'corp', id);
-            if (data) await corporations.add(app, id, data);
+            let data = await esi(app, 'corp', id);
+            if (data) {
+                await corporations.add(app, id, data);
+
+                data = await esi(app, 'corp', id + '/alliancehistory');
+                if (data) await corporations.updateHistory(app, id, data);
+            }
         }
     }
 }

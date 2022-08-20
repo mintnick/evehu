@@ -10,10 +10,10 @@ mixin new(title, contents, type)
       thead.thead-light
         tr
           th.image
-          th.align-center 名称
-          th.align-center 起始时间
+          th.text-center 名称
+          th.text-center 起始时间
           if show_mc
-            th.align-center 角色数
+            th.text-center 角色数
       tbody
         if contents != undefined
           each row in contents

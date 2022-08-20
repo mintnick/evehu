@@ -11,7 +11,7 @@ module.exports = async function (app) {
     try {
         let id = await app.mysql.queryField('char_id', 'select max(character_id) char_id from characters where character_id > 2100000000 and character_id < ?', [max_id])
         // if (!id) id = 2112000000;
-        // let id = parseInt(fs.readFileSync(path).toString());
+        // let id = parseInt(await fs.readFile(path).toString());
         const next = id + 5;
         while (id < max_id && id < next) {
             id++;
@@ -24,7 +24,7 @@ module.exports = async function (app) {
             }
         }
         // console.log('max char id: ' + id);
-        // fs.writeFileSync(path, id.toString());
+        // await fs.writeFile(path, id.toString());
     } catch (e) {
         console.log(e);
     }
