@@ -1,3 +1,4 @@
+
 async function formatData(data) {
     if (data['alliance_id'] === undefined) data['alliance_id'] = null;
     if (data['faction_id'] === undefined) data['faction_id'] = null

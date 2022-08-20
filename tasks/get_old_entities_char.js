@@ -13,7 +13,12 @@ module.exports = async function f(app) {
             id++;
             
             let data = await esi(app, 'char', id);
-            if (data != undefined) characters.add(app, id, data);
+            if (data != undefined) {
+                characters.add(app, id, data);
+
+                data = await esi(app, 'char', id + '/corporationhistory');
+                if (data) await characters.updateHistory(app, id, data);
+            }
         }
         fs.writeFileSync(path, id.toString());
 

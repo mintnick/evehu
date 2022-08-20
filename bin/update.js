@@ -26,7 +26,7 @@ let init = [
 let tasks = {
     'get_old_entities_char.js': 1,
     // 'get_old_characters.js': 1, // finished
-    'get_characters.js': 1200,
+    'get_characters.js': 600,
     'get_corporations.js': 1800,
     'get_alliances.js': 3600,
 

@@ -12,7 +12,12 @@ module.exports = async function (app) {
         const next = id + 10;
         while (id < 98000000 && id < next) {
             let data = await esi(app, 'char', id);
-            if (data != undefined) await characters.add(app, id, data);
+            if (data != undefined) {
+                await characters.add(app, id, data);
+
+                data = await esi(app, 'char', id + '/corporationhistory');
+                if (data) await characters.updateHistory(app, id, data);
+            }
             id++;
         }
         // console.log('max old char id: ' + id);
