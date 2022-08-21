@@ -10,7 +10,7 @@ module.exports = async function (req, res) {
         'from alliances '+
         'where alliance_id = ?', 
         [alli_id]);
-    if (details.length == 0) return;
+    if (details.length == 0) res.render('404');
     await req.app.mysql.query('update alliances set is_active = 1 where alliance_id = ?', [alli_id]);
 
     data.id = alli_id;
