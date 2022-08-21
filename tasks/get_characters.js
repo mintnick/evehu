@@ -13,7 +13,7 @@ module.exports = async function (app) {
         let id = await app.mysql.queryField('char_id', 'select max(character_id) char_id from characters where character_id > 2100000000 and character_id < ?', [max_id])
         // if (!id) id = 2112000000;
         // let id = parseInt(await fs.readFile(path).toString());
-        const next = id + 5;
+        const next = id + 10;
         while (id < max_id && id < next) {
             id++;
             let data = await esi(app, 'char', id);
@@ -22,7 +22,6 @@ module.exports = async function (app) {
                 await updateHistory(app, id);
             }
         }
-        // console.log('max char id: ' + id);
         // await fs.writeFile(path, id.toString());
     } catch (e) {
         console.log(e);

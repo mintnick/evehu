@@ -9,7 +9,7 @@ const path = __dirname + '/../max_ids/old_char_id';
 
 module.exports = async function (app) {
     try {
-        let id = parseInt(await fs.readFile(path).toString());
+        let id = parseInt((await fs.readFile(path)).toString());
         const next = id + 10;
         while (id < 98000000 && id < next) {
             let data = await esi(app, 'char', id);

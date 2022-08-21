@@ -12,7 +12,7 @@ module.exports = async function (app) {
         if (min >= max) return;
 
         let id = min;
-        const next = min + 10;
+        const next = min + 1000;
         let ids = await app.mysql.query(`select character_id from characters where character_id > ${min} and character_id < ${max}`);
         ids = ids.map(x => x.character_id);
         while (id < next) {

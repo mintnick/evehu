@@ -8,7 +8,7 @@ const fs = require('fs/promises');
 const path = __dirname + '/../max_ids/old_entity_id'
 module.exports = async function f(app) {
     try {
-        let id = parseInt(await fs.readFile(path).toString());
+        let id = parseInt((await fs.readFile(path)).toString());
         const next = id + 10;
         while (id < 2100000000 && id < next) {
             id++;
