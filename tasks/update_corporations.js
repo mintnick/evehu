@@ -30,8 +30,9 @@ async function updateCorp(app, ids) {
     for (const id of ids) {
         let data = await esi(app, 'corp', id);
         if (data) {
+            if (data['ceo_id'] == 1) data['name'] = data['name'] + '(已关闭)';
             await corporations.update(app, id, data);
-            if (id > 98000000) await updateHistory(app, id);
+            if (data['ceo_id'] != 1 && id > 98000000) await updateHistory(app, id);
         }
     }
 }

@@ -42,6 +42,8 @@ async function updateChar(app, ids) {
         if (data) {
             await characters.update(app, id, data);
             await updateHistory(app, id);
+        } else {
+            await characters.delete(app, id);
         }
     }
 }

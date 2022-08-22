@@ -36,6 +36,7 @@ async function updateAllis(app, ids) {
                     [id]
                 );
             } else {
+                data['name'] = data['name'] + '(已关闭)';
                 data['is_deleted'] = 1;
                 data['member_count'] = 0;
             }

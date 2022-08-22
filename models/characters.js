@@ -87,3 +87,9 @@ exports.updateHistory = async function (app, char_id, data) {
         console.log(e);
     }
 };
+
+exports.delete = async function (app, char_id) {
+    let result = await app.mysql.query(`delete from characters where character_id = ${char_id}`);
+    if (result.affectedRows == 1) console.log(`Char ${char_id} deleted`);
+    await app.mysql.query(`delete from corporation_history where character_id = ${char_id}`);
+}

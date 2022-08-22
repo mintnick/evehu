@@ -18,6 +18,7 @@ module.exports = async function (app) {
         while (id < 98200000 && id < next) {
             let data = await esi(app, 'corp', id);
             if (data) {
+                if (data['ceo_id'] == 1) data['name'] = data['name'] + '(已关闭)';
                 await corporations.add(app, id, data);
                 await updateHistory(app, id);
             }
