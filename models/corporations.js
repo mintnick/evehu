@@ -2,6 +2,7 @@ async function formatData(data) {
     data['date_founded'] = (data['date_founded'])?
         data['date_founded'].replace('T', ' ').slice(0, 19) : null;
     data['is_deleted'] = (data['ceo_id'] == 1) ? 1 : 0 ;
+    if (data['ceo_id'] == 1) data['name'] += '(已关闭)';
 
     return data;
 }

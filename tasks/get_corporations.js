@@ -2,7 +2,7 @@
 
 const esi = require('../models/esi.js');
 const corporations = require('../models/corporations.js');
-const updateHistory = require('./update_corp_history.js');
+const update_corp_history = require('./update_corp_history.js');
 const fs = require('fs/promises')
 
 const path = __dirname + '/../max_ids/corp_id';
@@ -14,13 +14,12 @@ module.exports = async function (app) {
         let id = await app.mysql.queryField('corp_id', 'select max(corporation_id) corp_id from corporations where corporation_id > 98000000 and corporation_id < 99000000');
         id = id ?? 98000000;
         // let id = parseInt(await fs.readFile(path).toString());
-        const next = id + 3;
+        const next = id + 5;
         while (id < 98200000 && id < next) {
             let data = await esi(app, 'corp', id);
             if (data) {
-                if (data['ceo_id'] == 1) data['name'] = data['name'] + '(已关闭)';
                 await corporations.add(app, id, data);
-                await updateHistory(app, id);
+                await update_corp_history(app, id);
             }
             id++;
         }
@@ -32,7 +31,7 @@ module.exports = async function (app) {
 
 async function getUndefinedCorps (app) {
     let corp_ids = await app.mysql.query(
-        'select corporation_id corp_id from corporation_history c ' + 
+        'select distinct(c.corporation_id) corp_id from corporation_history c ' + 
         'where c.corporation_id not in ' + 
         '(select corporation_id from corporations) ' +
         'limit 100'
@@ -43,7 +42,7 @@ async function getUndefinedCorps (app) {
             let data = await esi(app, 'corp', id);
             if (data) {
                 await corporations.add(app, id, data);
-                await updateHistory(app, id);
+                await update_corp_history(app, id);
             }
         }
     }

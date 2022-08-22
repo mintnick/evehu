@@ -27,7 +27,7 @@ let tasks = {
     'get_old_entities_char.js': 1,
     // 'get_old_characters.js': 1, // finished
     'get_characters.js': 60,
-    'get_corporations.js': 1200,
+    'get_corporations.js': 1,
     'get_alliances.js': 1200,
 
     'update_characters.js': 1,

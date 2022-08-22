@@ -2,7 +2,7 @@
 
 const esi = require('../models/esi.js');
 const characters = require('../models/characters.js');
-const updateHistory = require('./update_char_history.js');
+const update_char_history = require('./update_char_history.js');
 const fs = require('fs/promises');
 
 const max_id = 2120000000;
@@ -19,7 +19,7 @@ module.exports = async function (app) {
             let data = await esi(app, 'char', id);
             if (data) {
                 await characters.add(app, id, data);
-                await updateHistory(app, id);
+                await update_char_history(app, id);
             }
         }
         // await fs.writeFile(path, id.toString());

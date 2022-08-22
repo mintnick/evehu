@@ -1,6 +1,6 @@
 const esi = require('../models/esi.js');
 const characters = require('../models/characters.js');
-const updateHistory = require('./update_char_history.js');
+const update_char_history = require('./update_char_history.js');
 
 module.exports = async function (app) {
     let ids = await app.mysql.query(
@@ -41,9 +41,9 @@ async function updateChar(app, ids) {
         let data = await esi(app, 'char', id);
         if (data) {
             await characters.update(app, id, data);
-            await updateHistory(app, id);
+            await update_char_history(app, id);
         } else {
-            await characters.delete(app, id);
+
         }
     }
 }
