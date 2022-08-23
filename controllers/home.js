@@ -10,7 +10,8 @@ const titles = [
     'new_corporations',
 
     'new_characters',
-    'moving_characters',
+    'recent_char_joining',
+    'recent_char_leaving',
 ]
 
 module.exports = async function(req, res) {
@@ -20,5 +21,6 @@ module.exports = async function(req, res) {
         if(value) data[title] = value;
     }
     data.title = 'Home';
+    console.log(data['recent_char_joining']);
     return data;
 }

@@ -24,11 +24,11 @@ let init = [
 
 // {filename : seconds}
 let tasks = {
-    'get/get_old_entities_char.js': 1,
-    // 'get_old_characters.js': 1, // finished
-    'get/get_characters.js': 300,
-    'get/get_corporations.js': 300,
-    'get/get_alliances.js': 600,
+    'get/get_old_entities_char.js': 10,
+    // // 'get_old_characters.js': 1, // finished
+    'get/get_characters.js': 120,
+    'get/get_corporations.js': 600,
+    'get/get_alliances.js': 1200,
 
     'update/update_characters.js': 1,
     'update/update_corporations.js': 600,
@@ -37,7 +37,7 @@ let tasks = {
     'update/update_delta.js': 14400, // (4am - 8am)
     'update/update_redis_home.js': 600,
 
-    'util/populate_missing_entities.js': 1,
+    'util/populate_missing_entities.js': 5,
 };
 
 function initialize() {
@@ -49,12 +49,13 @@ function initialize() {
 
 async function runTask(task, func, app, runKey) {
     try {
-        // console.log('Task ' + task + ' started');
+        // console.log('Start: ' + task);
         await func(app);
     } catch (e) {
         console.log(task + ' failure:');
         console.log(e);
     } finally {
+        // console.log('Finish: ' + task);
         await app.redis.del(runKey);
     }
 }
@@ -77,8 +78,12 @@ async function update(app, tasks) {
 }
 
 async function clearRunKeys(app) {
-    const keys = await app.redis.keys('crinstance:running*');
+    let keys = await app.redis.keys('crinstance:running*');
     for (const key of keys) await app.redis.del(key);
+    
+    keys = await app.redis.keys('crinstance:current*');
+    for (const key of keys) await app.redis.del(key);
+
     setTimeout(() => { update(app, tasks); }, 1);
 }
 

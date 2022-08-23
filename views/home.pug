@@ -28,8 +28,11 @@ block content
     div.col-sm
       +new('新公司', new_corporations, 'corporation')
   h2.title 角色
-  div.row.mb-2
+  div.row
     div.col-sm
+      +moving_char('最近加入(非NPC公司)', recent_char_joining, 'join')
+    div.col-sm
+      +moving_char('最近离开(非NPC公司)', recent_char_leaving, 'leave')
+  div.row
+    div.col-6
       +new('新角色', new_characters, 'character')
-    div.col-sm
-      +moving_char('雇佣变动', moving_characters, 'character')

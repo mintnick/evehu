@@ -2,7 +2,7 @@
 module.exports = async function (app) {
     // update between 4am and 8am
     const hour = (new Date()).getHours();
-    if (hour < 4 || hour > 8) return;
+    if (hour < 3 || hour > 6) return;
 
     try {
         await app.mysql.query(

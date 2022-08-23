@@ -2,13 +2,13 @@ include image.pug
 
 mixin delta(title, contents, type, icon)
   div.table-responsive
-    h5 #{title}&nbsp&nbsp
+    h5(class=icon) #{title}&nbsp&nbsp
       if (icon == 'up')
-        img(src='/images/up.svg', width= 30, height= 30, alt='').lazy
+        img(src='/images/up.svg', width= 30, height= 30, alt='')
       else if (icon == 'down')
-        img(src='/images/down.svg', width= 30, height= 30, alt='').lazy
+        img(src='/images/down.svg', width= 30, height= 30, alt='')
       else if (icon == 'total')
-        img(src='/images/total.svg', width= 30, height= 30, alt='').lazy
+        img(src='/images/total.svg', width= 30, height= 30, alt='')
 
     table.table.table-bordered.table-dark.table-hover.align-middle
       thead.thead-light

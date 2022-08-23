@@ -2,23 +2,26 @@ include image.pug
 
 mixin moving_char(title, contents, type)
   div.table-responsive
-    h5 #{title}&nbsp&nbsp
+    h5(class=type) #{title}&nbsp&nbsp
       img(src='/images/change.svg', width= 30, height= 30, alt='').lazy
     table.table.table-bordered.table-dark.table-hover.align-middle
       thead.thead-light
         tr
           th.image
           th.text-center 角色名
-          th.text-center 加入公司
+          if type == 'join'
+            th.text-center.join 加入
+          else if type == 'leave'
+            th.text-center.leave 离开
           th.text-center 时间
       tbody
         if contents != undefined
           each row in contents
             tr
               td.image
-                +image(type, row.ch_id, 48, row.ch_name)
+                +image('character', row.ch_id, 48, row.ch_name)
               td
-                a(href='/' + type + '/' + row.ch_id)= row.ch_name
+                a(href='/character/' + row.ch_id)= row.ch_name
               td.text-center
                 a(href='/corporation/' + row.c_id)= row.c_name
-              td.text-center= row.start_date
+              td.text-center= row.date
