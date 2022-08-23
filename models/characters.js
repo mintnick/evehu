@@ -39,7 +39,7 @@ async function add(app, char_id) {
 
 async function update(app, char_id) {
     try {
-        let data = await esi(app, 'char', id);
+        let data = await esi(app, 'char', char_id);
         if (!data) return;
 
         data = await formatData(data);
@@ -60,7 +60,7 @@ async function update(app, char_id) {
 
 async function updateHistory(app, char_id) {
     try {
-        let data = await esi(app, 'char', id + '/corporationhistory');
+        let data = await esi(app, 'char', char_id + '/corporationhistory');
         if (!data || data.length == 0) return;
 
         // console.log(data);
