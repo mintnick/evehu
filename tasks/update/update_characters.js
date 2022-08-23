@@ -13,7 +13,7 @@ module.exports = async function (app) {
     ids = await app.mysql.query(
         'select character_id from characters ' +
         'where history_update is NULL ' +
-        'limit 1000'
+        'limit 100'
     );
     await updateChar(app, ids);
 
@@ -21,7 +21,7 @@ module.exports = async function (app) {
         'select character_id from characters '+
         'where '+
         'last_update < (NOW() - INTERVAL 7 DAY) '+
-        'limit 1000');
+        'limit 100');
     await updateChar(app, ids);
 
     // testing

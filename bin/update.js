@@ -26,16 +26,16 @@ let init = [
 let tasks = {
     'get/get_old_entities_char.js': 1,
     // 'get_old_characters.js': 1, // finished
-    'get/get_characters.js': 60,
-    'get/get_corporations.js': 1,
-    'get/get_alliances.js': 1200,
+    'get/get_characters.js': 300,
+    'get/get_corporations.js': 300,
+    'get/get_alliances.js': 600,
 
     'update/update_characters.js': 1,
     'update/update_corporations.js': 600,
-    'update/update_alliances.js': 3600,
+    'update/update_alliances.js': 1800,
 
     'update/update_delta.js': 14400, // (4am - 8am)
-    'update/update_redis_home.js': 3600,
+    'update/update_redis_home.js': 600,
 
     'util/populate_missing_entities.js': 1,
 };

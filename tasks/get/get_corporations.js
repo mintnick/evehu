@@ -29,7 +29,7 @@ async function getUndefinedCorps (app) {
         'select distinct(corporation_id) corp_id from corporation_history ' + 
         'where corporation_id not in ' + 
         '(select corporation_id from corporations) ' +
-        'limit 10'
+        'limit 100'
         );
     if (corp_ids.length > 0) {
         corp_ids = corp_ids.map(corp => corp.corp_id);

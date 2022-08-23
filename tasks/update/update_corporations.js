@@ -14,7 +14,7 @@ module.exports = async function (app) {
         'select corporation_id from corporations '+
             'where is_deleted != 1 and '+
             'last_update < (NOW() - INTERVAL 7 DAY) '+
-            'limit 1000');
+            'limit 100');
     await updateCorp(app, ids);
 
     // let ids = await app.mysql.query(
