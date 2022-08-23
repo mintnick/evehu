@@ -15,29 +15,29 @@ app.phin = phin;
 app.debug = false;
 
 let init = [
-    // 'get_active_alliances.js',
-    // 'get_alliances_corporations.js',
-    // 'get_npc_corporations.js'
+    // 'get/get_active_alliances.js',
+    // 'get/get_alliances_corporations.js',
+    // 'get/get_npc_corporations.js'
 
     // 'clear_characters.js',
 ]
 
 // {filename : seconds}
 let tasks = {
-    'get_old_entities_char.js': 1,
+    'get/get_old_entities_char.js': 1,
     // 'get_old_characters.js': 1, // finished
-    'get_characters.js': 60,
-    'get_corporations.js': 1,
-    'get_alliances.js': 1200,
+    'get/get_characters.js': 60,
+    'get/get_corporations.js': 1,
+    'get/get_alliances.js': 1200,
 
-    'update_characters.js': 1,
-    'update_corporations.js': 600,
-    'update_alliances.js': 3600,
+    'update/update_characters.js': 1,
+    'update/update_corporations.js': 600,
+    'update/update_alliances.js': 3600,
 
-    'update_delta.js': 14400, // (4am - 8am)
-    'update_redis_home.js': 3600,
+    'update/update_delta.js': 14400, // (4am - 8am)
+    'update/update_redis_home.js': 3600,
 
-    'populate_missing_entities.js': 1,
+    'util/populate_missing_entities.js': 1,
 };
 
 function initialize() {

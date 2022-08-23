@@ -1,13 +1,15 @@
+module.exports.add = add;
+module.exports.update = update;
 
-async function formatData(data) {
-    data['date_founded'] = data['date_founded'].replace('T', ' ').slice(0, 19);
+const esi = require("./esi.js");
 
-    return data;
-};
-
-exports.add = async function (app, alli_id, data) {
+async function add(app, alli_id) {
     try {
-        data = await formatData(data);
+        let data = await esi(app, 'alli', alli_id);
+        if (!data) return;
+
+        data['date_founded'] = data['date_founded'].replace('T', ' ').slice(0, 19);
+
         const {creator_corporation_id, creator_id, executor_corporation_id, date_founded, name, ticker} = data;
         let result = await app.mysql.query(
             'insert ignore alliances '+
@@ -20,11 +22,29 @@ exports.add = async function (app, alli_id, data) {
     } catch (e) {
         console.log(e);
     }
-};
+}
 
-exports.update = async function (app, alli_id, data) {
+async function update(app, alli_id) {
     try {
-        data = await formatData(data);
+        let data = await esi(app, 'alli', alli_id);
+        if (!data) return;
+
+        const corps = await esi(app, 'alli', id + '/corporations');
+        if (corps && corps.length == 0) {
+            data['name'] = data['name'] + '(已关闭)';
+            data['is_deleted'] = 1;
+            data['member_count'] = 0;
+        } else {
+            data['is_deleted'] = 0;
+            data['member_count'] = await app.mysql.queryField(
+                'total',
+                'select sum(member_count) total from corporations '+
+                    'where alliance_id = ?;',
+                [alli_id]
+            );
+        }
+        data['date_founded'] = data['date_founded'].replace('T', ' ').slice(0, 19);
+
         const {executor_corporation_id, member_count, is_deleted} = data;
         let result = await app.mysql.query(
             'update alliances set executor_corporation_id = ?, member_count = ?, last_update = NOW(), is_deleted = ? where alliance_id = ?',
@@ -34,4 +54,4 @@ exports.update = async function (app, alli_id, data) {
     } catch (e) {
         console.log(e);
     }
-};
+}

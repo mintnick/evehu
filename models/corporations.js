@@ -1,3 +1,10 @@
+
+module.exports.add = add;
+module.exports.update = update;
+module.exports.updateHistory = updateHistory;
+
+const esi = require('./esi.js');
+
 async function formatData(data) {
     data['date_founded'] = (data['date_founded'])?
         data['date_founded'].replace('T', ' ').slice(0, 19) : null;
@@ -11,8 +18,11 @@ async function isoToMysql(dateString) {
     return dateString.replace('T', ' ').slice(0, 19);
 }
 
-exports.add = async function (app, corp_id, data) {
+async function add(app, corp_id) {
     try {
+        let data = await esi(app, 'corp', corp_id);
+        if (!data) return;
+
         data = await formatData(data);
         const {alliance_id, ceo_id, creator_id, date_founded, member_count, name, ticker, is_deleted} = data;
         let result = await app.mysql.query(
@@ -23,13 +33,18 @@ exports.add = async function (app, corp_id, data) {
             [corp_id, alliance_id, ceo_id, creator_id, date_founded, member_count, name, ticker, is_deleted]
         );
         if (result.affectedRows == 1) console.log('Corp ' + corp_id + ' added');
+
+        if (corp_id > 98000000) await updateHistory(app, corp_id);
     } catch (e) {
         console.log(e);
     }
-};
+}
 
-exports.update = async function (app, corp_id, data) {
+async function update(app, corp_id) {
     try {
+        let data = await esi(app, 'corp', corp_id);
+        if (!data) return;
+
         data = await formatData(data);
         const {alliance_id, ceo_id, member_count, is_deleted} = data;
         let result = await app.mysql.query(
@@ -39,13 +54,18 @@ exports.update = async function (app, corp_id, data) {
             [alliance_id, ceo_id, member_count, is_deleted, corp_id]
         );
         // if (result.affectedRows == 1) console.log('Corp ' + corp_id + ' updated');
+
+        if (corp_id > 98000000) await updateHistory(app, corp_id);
     } catch (e) {
         console.log(e);
     }
-};
+}
 
-exports.updateHistory = async function (app, corp_id, data) {
+async function updateHistory(app, corp_id) {
     try {
+        let data = await esi(app, 'corp', corp_id + '/alliancehistory');
+        if (!data || data.length == 0) return;
+
         let i = 0;
         const last_record_id = data[i].record_id;
         const check = await app.mysql.query('select * from alliance_history where record_id = ? ', [last_record_id]);
@@ -89,4 +109,4 @@ exports.updateHistory = async function (app, corp_id, data) {
     } catch (e) {
         console.log(e);
     }
-};
+}

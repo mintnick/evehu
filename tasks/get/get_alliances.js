@@ -1,5 +1,4 @@
-const esi = require('../models/esi.js');
-const alliances = require('../models/alliances.js');
+const alliances = require('../../models/alliances.js');
 
 module.exports = async function (app) {
     try {
@@ -10,9 +9,8 @@ module.exports = async function (app) {
         'where alliance_id > 99000000 and alliance_id < 100000000');
         id = id ?? 99000000;
         const next = id + 3;
-        while (id < 100000000 && id < next) {
-            let data = await esi(app, 'alli', id);
-            if (data) await alliances.add(app, id, data);
+        while (id < next && id < 100000000) {
+            await alliances.add(app, id);
             id++;
         }
         // console.log('max alli id: ' + id);
@@ -23,17 +21,16 @@ module.exports = async function (app) {
 
 async function getUndefinedAlli(app) {
     let alli_ids = await app.mysql.query(
-        'select alliance_id alli_id from alliance_history a ' + 
-        'where a.alliance_id not in ' + 
+        'select distinct(alliance_id) alli_id from alliance_history ' + 
+        'where alliance_id not in ' + 
         '(select alliance_id from alliances) ' +
-        'limit 100'
+        'limit 10'
         );
     // console.log(corp_ids);
     if (alli_ids.length > 0) {
         alli_ids = alli_ids.map(alli => alli.alli_id);
         for (const id of alli_ids) {
-            const data = await esi(app, 'alli', id);
-            if (data) await alliances.add(app, id, data);
+            await alliances.add(app, id);
         }
     }
 }

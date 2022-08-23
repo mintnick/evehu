@@ -1,9 +1,8 @@
-const esi = require('../models/esi.js');
-const characters = require('../models/characters.js');
-const updateHistory = require('./update_char_history.js');
+const esi = require('../../models/esi.js');
+const characters = require('../../models/characters.js');
 const fs = require('fs/promises');
 
-const path = __dirname + '/../max_ids/old_char_id';
+const path = __dirname + '/../../max_ids/old_char_id';
 
 module.exports = async function (app) {
     try {
@@ -17,11 +16,7 @@ module.exports = async function (app) {
         ids = ids.map(x => x.character_id);
         while (id < next && id < max) {
             if (!ids.includes(id)) {
-                let data = await esi(app, 'char', id);
-                if (data) {
-                    await characters.add(app, id, data);
-                    await updateHistory(app, id);
-                }
+                await characters.add(app, id);
             }
             id++;
         }

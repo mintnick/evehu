@@ -1,6 +1,5 @@
-const esi = require('../models/esi.js');
-const corporations = require('../models/corporations.js');
-const updateHistory = require('./update_corp_history.js');
+
+const corporations = require('../../models/corporations.js');
 
 module.exports = async function (app) {
     let ids = await app.mysql.query(
@@ -28,11 +27,6 @@ async function updateCorp(app, ids) {
     if (ids.length == 0) return;
     ids = ids.map(id => id.corporation_id);
     for (const id of ids) {
-        let data = await esi(app, 'corp', id);
-        if (data) {
-            if (data['ceo_id'] == 1) data['name'] = data['name'] + '(已关闭)';
-            await corporations.update(app, id, data);
-            if (data['ceo_id'] != 1 && id > 98000000) await updateHistory(app, id);
-        }
+        await corporations.update(app, id);
     }
 }

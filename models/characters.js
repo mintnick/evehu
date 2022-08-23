@@ -1,3 +1,9 @@
+module.exports.add = add;
+module.exports.update = update;
+module.exports.updateHistory = updateHistory;
+module.exports.remove = remove;
+
+const esi = require('./esi.js');
 
 async function formatData(data) {
     if (data['alliance_id'] === undefined) data['alliance_id'] = null;
@@ -10,8 +16,11 @@ async function isoToMysql(dateString) {
     return dateString.replace('T', ' ').slice(0, 19);
 }
 
-exports.add = async function (app, char_id, data) {
+async function add(app, char_id) {
     try {
+        let data = await esi(app, 'char', char_id);
+        if (!data) return;
+
         data = await formatData(data);
         const {alliance_id, corporation_id, name, birthday, security_status, faction_id} = data;
         let result = await app.mysql.query(
@@ -21,13 +30,18 @@ exports.add = async function (app, char_id, data) {
             [char_id, alliance_id, corporation_id, name, birthday, security_status, faction_id]
         );
         if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
+
+        await updateHistory(app, char_id);
     } catch (e) {
         console.log(e);
     }
-};
+}
 
-exports.update = async function (app, char_id, data) {
+async function update(app, char_id) {
     try {
+        let data = await esi(app, 'char', id);
+        if (!data) return;
+
         data = await formatData(data);
         const {alliance_id, corporation_id, security_status, faction_id} = data;
         let result = await app.mysql.query(
@@ -37,13 +51,18 @@ exports.update = async function (app, char_id, data) {
             [alliance_id, corporation_id, security_status, faction_id, char_id]
         );
         // if (result.affectedRows == 1) console.log('Char ' + char_id + ' updated');
+
+        await updateHistory(app, char_id);
     } catch (e) {
         console.log(e);
     }
-};
+}
 
-exports.updateHistory = async function (app, char_id, data) {
+async function updateHistory(app, char_id) {
     try {
+        let data = await esi(app, 'char', id + '/corporationhistory');
+        if (!data || data.length == 0) return;
+
         // console.log(data);
         const last_record_id = data[0].record_id;
         const check = await app.mysql.query('select * from corporation_history where record_id = ?', [last_record_id]);
@@ -86,9 +105,9 @@ exports.updateHistory = async function (app, char_id, data) {
     } catch (e) {
         console.log(e);
     }
-};
+}
 
-exports.delete = async function (app, char_id) {
+async function remove(app, char_id) {
     let result = await app.mysql.query(`delete from characters where character_id = ${char_id}`);
     if (result.affectedRows == 1) console.log(`Char ${char_id} deleted`);
     await app.mysql.query(`delete from corporation_history where character_id = ${char_id}`);
