@@ -23,6 +23,7 @@ async function getData(req, res, next, controllerFile, pugFile) {
 function addGet(route, controllerFile, pugFile) {
     if (pugFile === undefined) pugFile = controllerFile;
     router.get(route, (req, res, next) => {
+        res.set('Cache-Control', 'public, max-age=600');
         getData(req, res, next, controllerFile, pugFile)
     });
 }
