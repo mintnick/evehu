@@ -11,14 +11,16 @@ async function add(app, alli_id) {
         data['date_founded'] = data['date_founded'].replace('T', ' ').slice(0, 19);
 
         const {creator_corporation_id, creator_id, executor_corporation_id, date_founded, name, ticker} = data;
+        const member_count = await app.mysql.queryField('total', `select sum(member_count) total from corporations where alliance_id = ${alli_id}`);
+
         let result = await app.mysql.query(
             'insert ignore alliances '+
             '(alliance_id, creator_corporation_id, creator_id, executor_corporation_id, '+
-            'date_founded, name, ticker, last_update) '+
-            'values (?, ?, ?, ?, ?, ?, ?, NOW())',
-            [alli_id, creator_corporation_id, creator_id, executor_corporation_id, date_founded, name, ticker]
+            'date_founded, name, ticker, last_update, member_count) '+
+            'values (?, ?, ?, ?, ?, ?, ?, NOW(), member_count)',
+            [alli_id, creator_corporation_id, creator_id, executor_corporation_id, date_founded, name, ticker, member_count]
         )
-        // if (result.affectedRows == 1) console.log('Alli ' + alli_id + ' added');
+        if (result.affectedRows == 1) console.log('Alli ' + alli_id + ' added');
     } catch (e) {
         console.log(e);
     }

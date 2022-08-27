@@ -4,6 +4,7 @@ html {
   --leave: chocolate;
   --up: rgb(177, 52, 61);
   --down: rgb(91, 148, 79);
+  --btnSelect: rgb(38, 77, 124);
 }
 
 body {
@@ -105,11 +106,63 @@ h2.title {
 
 /* Toast */
 .toast {
-  width: 50%;
+  width: 70%;
 }
 
 .toast-body {
   color: black;
   font-size: 1.5rem;
   font-weight: 500;
+}
+
+/* Submit form */
+/* .submit-form .row {
+  width: 50%;
+} */
+
+.submit-radio label {
+  display: block;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  width: 100%;
+  padding: 5px;
+  border: 2px solid #CCC;
+  border-radius: 5%;
+  cursor: pointer;
+  -webkit-appearance: button;
+  /* WebKit */
+  -moz-appearance: button;
+  /* Mozilla */
+  -o-appearance: button;
+  /* Opera */
+  -ms-appearance: button;
+  /* Internet Explorer */
+  appearance: button;
+  /* CSS3 */
+}
+
+.submit-radio input[type="radio"] {
+  position:fixed;
+  opacity: 0;
+  z-index: 100;
+}
+
+.submit-radio input[type="radio"]:checked+label,
+.Checked+label {
+  background: var(--btnSelect);
+}
+
+.submit-radio label:hover {
+  background:var(--btnSelect);
+}
+
+input#name {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.submit-btn {
+  min-width: 150px;
+  font-size: 1.5rem;
 }

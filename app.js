@@ -2,9 +2,10 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+// var logger = require('morgan');
 var redis = require('async-redis').createClient();
 var MySQLDB = require('./models/mysqldb.js');
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes.js');
 
@@ -22,11 +23,14 @@ app.mysql = new MySQLDB({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use(async function(req, res, next) {
   let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;

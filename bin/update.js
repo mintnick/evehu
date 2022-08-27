@@ -37,16 +37,17 @@ let tasks = {
     'get/get_corporations.js': 600,
     'get/get_alliances.js': 1200,
 
-    'update/update_characters.js': 5,
+    // 'update/update_characters.js': 5,
     'update/update_corporations.js': 60,
-    'update/update_alliances.js': 300,
+    'update/update_alliances.js': 120,
 
     'update/update_delta.js': 14400, // (4am - 8am)
     'update/update_redis_home.js': 600,
-    'update/update_char_by_affiliation.js': 60,
+    'update/update_char_by_affiliation.js': 10,
 
     'util/populate_missing_entities.js': 10,
-    'util/populate_redis_affiliation.js': 600,
+    'util/populate_redis_affiliation.js': 1200,
+    'util/populate_char_history.js': 15,
 };
 
 function initialize() {

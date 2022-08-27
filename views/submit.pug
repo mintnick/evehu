@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  .d-flex.justify-content-center
+    h1 添加缺失数据
+  .d-flex.justify-content-center.mt-4
+    div(style="width: 50%;")
+      form(action="/post/" type="post")
+        .d-flex.justify-content-center
+          h4 类型
+        .row.justify-content-md-center
+          .col-sm.submit-radio
+            input#radio-char(type="radio" name="type" checked="checked")
+            label(for="radio-char") 角色
+          .col-sm.submit-radio
+            input#radio-corp(type="radio" name="type")
+            label(for="radio-corp") 公司
+          .col-sm.submit-radio
+            input#radio-alli(type="radio" name="type")
+            label(for="radio-alli") 联盟
+        .row.mt-4
+          .form-group
+            .d-flex.justify-content-center
+              h4 名称
+            input.form-control#name(type="text")
+        .row.justify-content-md-center.mt-5
+          .col-md-auto
+            button.submit-btn.btn.btn-primary(type="submit") 提交

@@ -28,7 +28,7 @@ async function add(app, char_id) {
             'values(?, ?, ?, ?, ?, ?, ?, NOW())',
             [char_id, alliance_id, corporation_id, name, birthday, security_status, faction_id]
         );
-        // if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
+        if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
 
         await updateHistory(app, char_id);
     } catch (e) {
@@ -94,11 +94,11 @@ async function updateHistory(app, char_id) {
                 'values (?, ?, ?, ?)',
                 [record_id, char_id, corporation_id, start_date]
                 )
-            // if (result.affectedRows == 1) console.log(`Char ${char_id} history updated`);
+            if (result.affectedRows == 1) console.log(`Char ${char_id} history updated`);
         }
 
         await app.mysql.query(
-            'update characters set last_update = NOW() where character_id = ?',
+            'update characters set last_update = NOW(), history_update = NOW() where character_id = ?',
             [char_id]
         );
     } catch (e) {

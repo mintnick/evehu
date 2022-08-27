@@ -14,7 +14,7 @@ module.exports = async function (app) {
     setRedis(app, 'recent_char_leaving', 'SELECT h.record_id id, h.character_id ch_id, ch.name ch_name, c.corporation_id c_id, c.name c_name, date_format(h.end_date, "%Y年%m月%d日 %H:%i") date FROM `corporation_history` h left join characters ch on h.character_id = ch.character_id left join corporations c on h.corporation_id = c.corporation_id where h.end_date is not null and h.corporation_id > 98000000 order by date desc limit 10');
     setRedis(app, 'recent_char_joining', 'SELECT h.record_id id, h.character_id ch_id, ch.name ch_name, c.corporation_id c_id, c.name c_name, date_format(h.start_date, "%Y年%m月%d日 %H:%i") date FROM `corporation_history` h left join characters ch on h.character_id = ch.character_id left join corporations c on h.corporation_id = c.corporation_id where h.end_date is not null and h.corporation_id > 98000000 order by date desc limit 10');
 
-    console.log('Redis home updated');
+    // console.log('Redis home updated');
 };
 
 async function setRedis(app, key, query, values) {

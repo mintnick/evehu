@@ -1,4 +1,3 @@
-const utf8 = require('utf8');
 
 module.exports = async function (req, res) {
     const alli_id = req.params.id;

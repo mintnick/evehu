@@ -32,7 +32,7 @@ async function add(app, corp_id) {
             'values(?, ?, ?, ? ,?, ?, ?, ? ,?, NOW())',
             [corp_id, alliance_id, ceo_id, creator_id, date_founded, member_count, name, ticker, is_deleted]
         );
-        // if (result.affectedRows == 1) console.log('Corp ' + corp_id + ' added');
+        if (result.affectedRows == 1) console.log('Corp ' + corp_id + ' added');
 
         if (corp_id > 98000000) await updateHistory(app, corp_id);
     } catch (e) {
@@ -100,7 +100,7 @@ async function updateHistory(app, corp_id) {
                 'values (?, ?, ?, ?)',
                 [record_id, corp_id, alliance_id, start_date]
                 )
-            // if (result.affectedRows == 1) console.log(`Corp ${corp_id} history updated`);
+            if (result.affectedRows == 1) console.log(`Corp ${corp_id} history updated`);
         }
         await app.mysql.query(
             'update corporations set last_update = NOW() where corporation_id = ?',
