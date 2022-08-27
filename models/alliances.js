@@ -18,7 +18,7 @@ async function add(app, alli_id) {
             'values (?, ?, ?, ?, ?, ?, ?, NOW())',
             [alli_id, creator_corporation_id, creator_id, executor_corporation_id, date_founded, name, ticker]
         )
-        if (result.affectedRows == 1) console.log('Alli ' + alli_id + ' added');
+        // if (result.affectedRows == 1) console.log('Alli ' + alli_id + ' added');
     } catch (e) {
         console.log(e);
     }

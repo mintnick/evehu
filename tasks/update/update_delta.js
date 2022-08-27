@@ -18,6 +18,8 @@ module.exports = async function (app) {
                 'diff_7days = member_count - mc_7 '+
                 'where is_deleted != 1'
         )
+
+        console.log('Delta updated');
     } catch (e) {
         console.log(e);
     }

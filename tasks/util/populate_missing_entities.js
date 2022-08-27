@@ -2,6 +2,7 @@
 const characters = require('../../models/characters.js');
 const corporations = require('../../models/corporations.js');
 const alliances = require('../../models/alliances.js');
+const esi = require('../../models/esi.js');
 
 const fs = require('fs/promises');
 
@@ -46,8 +47,22 @@ module.exports = async function (app) {
             'limit 100'
         );
         if (alli_ids.length > 0) {
-            alli_ids = alli_ids.map(i => i.corp_id);
+            alli_ids = alli_ids.map(i => i.alli_id);
             for(const id of alli_ids) await alliances.add(app, id);
+        }
+
+
+        alli_ids = await app.mysql.query(
+            'select alliance_id from alliances '+
+            'where is_deleted != 1 and member_count is null '+
+            'limit 100'
+        );
+        if (alli_ids.length > 0) {
+            alli_ids = alli_ids.map(i => i.alliance_id);
+            for (const id of alli_ids) {
+                const corp_ids = await esi(app, 'alli', id + '/corporations');
+                for (const corp_id of corp_ids) await corporations.add(app, corp_id);
+            }
         }
     } catch (e) {
         console.log(e);

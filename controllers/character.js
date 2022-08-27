@@ -12,7 +12,7 @@ module.exports = async function(req, res) {
         [char_id]
     );
     if (details.length == 0) res.render('404');
-    await req.app.mysql.query('update characters set is_active = 1 where character_id = ?', [char_id]);
+    // await req.app.mysql.query('update characters set is_active = 1 where character_id = ?', [char_id]);
 
     data.id = char_id;
     data.details = details[0];
