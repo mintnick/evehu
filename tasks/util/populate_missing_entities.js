@@ -61,7 +61,11 @@ module.exports = async function (app) {
             alli_ids = alli_ids.map(i => i.alliance_id);
             for (const id of alli_ids) {
                 const corp_ids = await esi(app, 'alli', id + '/corporations');
-                for (const corp_id of corp_ids) await corporations.add(app, corp_id);
+                if (corp_ids.length > 0) {
+                    for (const corp_id of corp_ids) {
+                        await corporations.add(app, corp_id);
+                    }
+                }
             }
         }
     } catch (e) {
