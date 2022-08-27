@@ -1,10 +1,10 @@
 // 2,100,000,000	2,147,483,647	DUST characters, EVE characters created after 2016-05-30
 
 const characters = require('../../models/characters.js');
-const fs = require('fs/promises');
+// const fs = require('fs/promises');
 
 const max = 2120000000;
-const path = __dirname + '../../max_ids/char_id';
+// const path = __dirname + '../../max_ids/char_id';
 
 module.exports = async function (app) {
     try {

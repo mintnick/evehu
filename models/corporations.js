@@ -103,7 +103,7 @@ async function updateHistory(app, corp_id) {
             // if (result.affectedRows == 1) console.log(`Corp ${corp_id} history updated`);
         }
         await app.mysql.query(
-            'update corporations set history_update = NOW() where corporation_id = ?',
+            'update corporations set last_update = NOW() where corporation_id = ?',
             [corp_id]
         );
     } catch (e) {

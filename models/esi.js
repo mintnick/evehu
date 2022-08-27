@@ -23,3 +23,10 @@ module.exports = async function (app, type, id) {
     }
     // console.log(res);
 };
+
+async function affiliation(app, ids) {
+    const params = {url: baseUrl + 'characters/affiliation/', method: 'post', data: ids};
+    let res = await app.phin(params);
+    if (res.statusCode == 200) return JSON.parse(res.body);
+}
+module.exports.affiliation = affiliation;

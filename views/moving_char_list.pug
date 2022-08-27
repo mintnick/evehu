@@ -22,6 +22,6 @@ mixin moving_char(title, contents, type)
                 +image('character', row.ch_id, 48, row.ch_name)
               td
                 a(href='/character/' + row.ch_id)= row.ch_name
-              td.text-center
+              td.text-center.small
                 a(href='/corporation/' + row.c_id)= row.c_name
-              td.text-center= row.date
+              td.text-center.small= row.date

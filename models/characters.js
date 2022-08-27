@@ -1,7 +1,6 @@
 module.exports.add = add;
 module.exports.update = update;
 module.exports.updateHistory = updateHistory;
-module.exports.remove = remove;
 
 const esi = require('./esi.js');
 
@@ -29,7 +28,7 @@ async function add(app, char_id) {
             'values(?, ?, ?, ?, ?, ?, ?, NOW())',
             [char_id, alliance_id, corporation_id, name, birthday, security_status, faction_id]
         );
-        if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
+        // if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
 
         await updateHistory(app, char_id);
     } catch (e) {
@@ -99,16 +98,10 @@ async function updateHistory(app, char_id) {
         }
 
         await app.mysql.query(
-            'update characters set history_update = NOW() where character_id = ?',
+            'update characters set last_update = NOW() where character_id = ?',
             [char_id]
         );
     } catch (e) {
         console.log(e);
     }
-}
-
-async function remove(app, char_id) {
-    let result = await app.mysql.query(`delete from characters where character_id = ${char_id}`);
-    if (result.affectedRows == 1) console.log(`Char ${char_id} deleted`);
-    await app.mysql.query(`delete from corporation_history where character_id = ${char_id}`);
 }

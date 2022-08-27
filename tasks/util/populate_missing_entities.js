@@ -1,11 +1,15 @@
-const esi = require('../../models/esi.js');
+
 const characters = require('../../models/characters.js');
+const corporations = require('../../models/corporations.js');
+const alliances = require('../../models/alliances.js');
+
 const fs = require('fs/promises');
 
 const path = __dirname + '/../../max_ids/old_char_id';
 
 module.exports = async function (app) {
     try {
+        // missing chars 90000000 - 98000000
         const min = parseInt((await fs.readFile(path)).toString());
         const max = 94089195;
         if (min >= max) return;
@@ -21,6 +25,30 @@ module.exports = async function (app) {
             id++;
         }
         await fs.writeFile(path, id.toString());
+
+        // missing corps
+        let corp_ids = await app.mysql.query(
+            'select distinct(corporation_id) corp_id from corporation_history ' + 
+            'where corporation_id not in ' + 
+            '(select corporation_id from corporations) ' +
+            'limit 100'
+        );
+        if (corp_ids.length > 0) {
+            corp_ids = corp_ids.map(i => i.corp_id);
+            for(const id of corp_ids) await corporations.add(app, id);
+        }
+
+        // missing allis
+        let alli_ids = await app.mysql.query(
+            'select distinct(alliance_id) alli_id from alliance_history ' + 
+            'where alliance_id not in ' + 
+            '(select alliance_id from alliances) ' +
+            'limit 100'
+        );
+        if (alli_ids.length > 0) {
+            alli_ids = alli_ids.map(i => i.corp_id);
+            for(const id of alli_ids) await alliances.add(app, id);
+        }
     } catch (e) {
         console.log(e);
     }

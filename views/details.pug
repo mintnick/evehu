@@ -65,12 +65,6 @@ mixin details(details, type, id)
             h5 7日内成员波动
           td
             h5= details.diff_7days
-      if type == 'character'
-        tr
-          td 
-            h5 安全等级
-          td
-            h5 #{details.security_status}
       tr
         td
           h5 创建时间

@@ -46,6 +46,10 @@ table {
   padding: 0, 0;
 }
 
+table td.small {
+  font-size: 16px;
+}
+
 table a {
   text-decoration: none;
 }

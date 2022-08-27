@@ -5,7 +5,7 @@ module.exports = async function(req, res) {
 
     // details
     const details = await req.app.mysql.query(
-        'select c.alliance_id alliance_id, c.corporation_id corporation_id, c.name name, date_format(c.birthday, "%Y年%m月%d日") date_founded, c.security_status security_status, co.name corp_name, a.name alli_name '+
+        'select c.alliance_id alliance_id, c.corporation_id corporation_id, c.name name, date_format(c.birthday, "%Y年%m月%d日") date_founded, co.name corp_name, a.name alli_name '+
         'from characters c left join corporations co on c.corporation_id = co.corporation_id '+
         'left join alliances a on c.alliance_id = a.alliance_id '+
         'where character_id = ?',
