@@ -1,4 +1,3 @@
-
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
   .container-fluid
     a.navbar-brand.logo(href='/')
@@ -12,16 +11,22 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
           a.nav-link(href='/') 首页
         li.nav-item
           a.nav-link(href='https://github.com/mintnick/evehu', target='_blank') Github
+        li.nav-item
+          a.nav-link(href='/submit') 补充数据
       form(onsubmit= 'return false;' accept-charset="GB18030").d-flex.col-5
-        input.form-control.me-2(type='search', name='name', id='autocomplete' placeholder='搜索 角色/公司/联盟' aria-label='Search')
-      ul.navbar-nav.mb-2.mb-lg-0.col-3.ps-2
+        input.form-control.me-2(type='search', name='name', id='autocomplete' placeholder='输入 角色/公司/联盟,稍等片刻' aria-label='Search')
+      ul.navbar-nav.mb-2.mb-lg-0.col-2.ps-5
         li.nav-item
-          a.nav-link(href='/info') 说明文档
+          .btn-group
+            a.btn.btn-lg.btn-secondary(type="button" href="/info") 文档
+            button.btn.btn-secondary.dropdown-toggle.dropdown-toggle.split(type="button" data-bs-toggle="dropdown" aria-expanded="false")
+              span.visually-hidden Toggle Dropdown
+            ul.dropdown-menu(aria-labelledby="dropdownMenuLink")
+              li
+                a.dropdown-item(href="/info#privacy") 数据隐私
+              li
+                a.dropdown-item(href="/info#delay") 数据延迟
+      ul.navbar-nav.mb-2.mb-lg-0.col-2
         li.nav-item
-          a.nav-link(href='/info#privacy') 隐私
-        li.nav-item
-          a.nav-link(href='/info#delay') 延迟
-        li.nav-item
-      ul.navbar-nav.mb-2.mb-lg-0.col-1
-          a.nav-link(href='/donate') 捐赠
+            a.btn.btn-lg.btn-success(type="button" href='/donate') 捐赠
       

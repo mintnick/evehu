@@ -13,6 +13,8 @@ app.mysql = new MySQLDB({
 app.redis = redis;
 app.phin = phin;
 app.debug = false;
+
+app.sleep = (ms) => { return new Promise(resolve=>{ setTimeout(resolve,ms) });}
 app.isDowntime = () => {
     const date = new Date();
     const hour = date.getHours();
@@ -31,7 +33,7 @@ let init = [
 
 // {filename : seconds}
 let tasks = {
-    'get/get_old_entities_char.js': 10,
+    'get/get_old_entities_char.js': 2,
     // // 'get_old_characters.js': 1, // finished
     'get/get_characters.js': 60,
     'get/get_corporations.js': 600,

@@ -45,7 +45,7 @@ async function update(app, char_id) {
         const {alliance_id, corporation_id, security_status, faction_id} = data;
         let result = await app.mysql.query(
             'update characters set '+
-            'alliance_id = ?, corporation_id = ?, security_status = ?, faction_id = ?, last_update = NOW() '+
+            'alliance_id = ?, corporation_id = ?, security_status = ?, faction_id = ? '+
             'where character_id = ?',
             [alliance_id, corporation_id, security_status, faction_id, char_id]
         );
@@ -94,11 +94,11 @@ async function updateHistory(app, char_id) {
                 'values (?, ?, ?, ?)',
                 [record_id, char_id, corporation_id, start_date]
                 )
-            if (result.affectedRows == 1) console.log(`Char ${char_id} history updated`);
+            // if (result.affectedRows == 1) console.log(`Char ${char_id} history updated`);
         }
 
         await app.mysql.query(
-            'update characters set last_update = NOW(), history_update = NOW() where character_id = ?',
+            'update characters set history_update = NOW() where character_id = ?',
             [char_id]
         );
     } catch (e) {

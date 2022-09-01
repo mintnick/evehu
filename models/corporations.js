@@ -100,7 +100,7 @@ async function updateHistory(app, corp_id) {
                 'values (?, ?, ?, ?)',
                 [record_id, corp_id, alliance_id, start_date]
                 )
-            if (result.affectedRows == 1) console.log(`Corp ${corp_id} history updated`);
+            // if (result.affectedRows == 1) console.log(`Corp ${corp_id} history updated`);
         }
         await app.mysql.query(
             'update corporations set last_update = NOW() where corporation_id = ?',
