@@ -11,9 +11,10 @@
 - Remove some tables, eg. group security status
 - Refactor classes to models
 - Modify some task logic
-- Add a form to allow user to manually add missing entity
+- Add a form to allow user to manually add missing entity (due to the discontinuous ids in some ranges and the lack of third party APIs)
 
 ### Current status
 
 Open test
+
 Data fetching process: ~60%(2022.09.02)
