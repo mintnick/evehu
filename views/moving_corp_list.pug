@@ -20,7 +20,7 @@ mixin moving_corp(title, contents, type)
             tr
               td.image
                 +image('corporation', row.co_id, 48, row.co_name)
-              td
+              td.small
                 a(href='/corporation/' + row.co_id)= row.co_name
               td.text-center.small
                 a(href='/alliance/' + row.a_id)= row.a_name

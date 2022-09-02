@@ -20,7 +20,7 @@ mixin moving_char(title, contents, type)
             tr
               td.image
                 +image('character', row.ch_id, 48, row.ch_name)
-              td
+              td.small
                 a(href='/character/' + row.ch_id)= row.ch_name
               td.text-center.small
                 a(href='/corporation/' + row.c_id)= row.c_name
