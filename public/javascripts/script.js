@@ -2,10 +2,13 @@
 $(document).ready(function() {
     // Auto-complete
     $('#autocomplete').autocomplete({
+        deferRequestBy: 1000,
         autoSelectFirst: true,
         serviceUrl: '/autocomplete/',
         dataType: 'json',
         groupBy: 'groupBy',
+        showNoSuggestionNotice: true,
+        noSuggestionNotice: '无搜索结果',
         onSelect: function (suggestion) {
             window.location = '/' + suggestion.data.type + '/' + suggestion.data.id;
         },

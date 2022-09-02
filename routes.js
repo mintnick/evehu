@@ -48,7 +48,7 @@ addStatic('/donate/', 'donate', '捐赠');
 addStatic('/projects/', 'projects', '其它项目');
 
 router.get('/autocomplete/', async function(req, res, next) {
-    console.log(req.query.query)
+    // console.log(req.query.query)
     const controller = require(res.app.root + '/controllers/autocomplete.js');
     await controller(req, res);
 });
