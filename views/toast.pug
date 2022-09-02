@@ -1,10 +1,7 @@
-- var msg = "注意：当前数据尚不完整，仅用于测试，点a这里补充数据"
-
-if msg != null && msg.length > 0
-  .w-100
-    .toast.show.mx-auto.mb-2.align-items-center(role="alert" aria-live="assertive" aria-atomic="true")
-      .d-flex
-        .toast-body.mx-auto 注意：当前数据尚不完整，仅供参考，点
-          a(href="/submit") 这里
-          |补充数据
-        //- button.btn-close.me-2.m-auto(type="button" data-bs-dismiss="toast" aria-label="Close")
+.w-100
+  .toast.show.mx-auto.mb-2.align-items-center(role="alert" aria-live="assertive" aria-atomic="true")
+    .d-flex
+      .toast-body.mx-auto 当前数据尚不完整，仅供参考，点
+        a(href="/submit" style="text-decoration: none;") 这里
+        |补充数据
+      //- button.btn-close.me-2.m-auto(type="button" data-bs-dismiss="toast" aria-label="Close")

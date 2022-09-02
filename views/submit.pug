@@ -5,18 +5,18 @@ block content
     h1 添加缺失数据
   .d-flex.justify-content-center.mt-4
     div(style="width: 50%;")
-      form(action="/post/" type="post")
+      form(action="/submit_post/" type="post")
         .d-flex.justify-content-center
           h4 类型
         .row.justify-content-md-center
           .col-sm.submit-radio
-            input#radio-char(type="radio" name="type" checked="checked")
+            input#radio-char(type="radio" name="char" checked="checked")
             label(for="radio-char") 角色
           .col-sm.submit-radio
-            input#radio-corp(type="radio" name="type")
+            input#radio-corp(type="radio" name="corp")
             label(for="radio-corp") 公司
           .col-sm.submit-radio
-            input#radio-alli(type="radio" name="type")
+            input#radio-alli(type="radio" name="alli")
             label(for="radio-alli") 联盟
         .row.mt-4
           .form-group

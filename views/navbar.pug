@@ -15,7 +15,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
           a.nav-link(href='/submit') 补充数据
       form(onsubmit= 'return false;' accept-charset="GB18030").d-flex.col-5
         input.form-control.me-2(type='search', name='name', id='autocomplete' placeholder='输入 角色/公司/联盟,稍等片刻' aria-label='Search')
-      ul.navbar-nav.mb-2.mb-lg-0.col-2.ps-5
+      ul.navbar-nav.mb-2.mb-lg-0.col-2.ps-2
         li.nav-item
           .btn-group
             a.btn.btn-lg.btn-secondary(type="button" href="/info") 文档
@@ -28,5 +28,5 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
                 a.dropdown-item(href="/info#delay") 数据延迟
       ul.navbar-nav.mb-2.mb-lg-0.col-2
         li.nav-item
-            a.btn.btn-lg.btn-success(type="button" href='/donate') 捐赠
+            a.btn.btn-lg.btn-success.donateBtn(type="button" href='/donate') 捐赠
       

@@ -24,7 +24,7 @@ a {
 
 /* Navbar */
 nav {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .navbar-collapse form button {
@@ -39,6 +39,106 @@ nav {
 
 .logo {
   padding-top: 0px;
+}
+
+.donateBtn {
+  font-size: 1.3rem;
+  color:#000;
+  --background: #fff;
+  --border-color: linear-gradient(to bottom right, red, blue);
+  --border-width: .125em;
+  --edge-size: .5em;
+
+  position: relative;
+  isolation: isolate;
+
+  display: inline-grid;
+  padding: 0.5em 1.5em;
+  border: 0;
+  background-color: var(--background);
+  clip-path: polygon(
+      /* top-left 1 */
+      0% var(--edge-size),
+      /* top-left 2 */
+      var(--edge-size) 0%,
+      /* top-right */
+      100% 0,
+      /* bottom-right 1 */
+      100% calc(100% - var(--edge-size)),
+      /* bottom-right 2 */
+      calc(100% - var(--edge-size)) 100%,
+      /* bottom-left */
+      0 100%
+      );
+
+  transition: color 250ms;
+}
+
+.donateBtn::before,
+.donateBtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.donateBtn::before {
+  background: var(--border-color);
+  z-index: -2;
+}
+
+.donateBtn::after {
+  background: var(--background);
+  z-index: -1;
+
+  clip-path: polygon(
+      /* top-left 1 */
+      var(--border-width)
+      calc(var(--edge-size) + var(--border-width) * .5),
+      /* top-left 2 */
+      calc(var(--edge-size) + var(--border-width) * .5)
+      var(--border-width),
+      /* top-right */
+      calc(100% - var(--border-width))
+      var(--border-width),
+      /* bottom-right 1 */
+      calc(100% - var(--border-width))
+      calc(100% - calc(var(--edge-size) + var(--border-width) * .5)),
+      /* bottom-right 2 */
+      calc(100% - calc(var(--edge-size) + var(--border-width) * .5))
+      calc(100% - var(--border-width)),
+      /* bottom-left */
+      var(--border-width)
+      calc(100% - var(--border-width))
+      );
+
+  transition: clip-path 500ms;
+}
+
+.donateBtn:where(:hover, :focus) {
+  color: white;
+}
+
+.donateBtn:where(:hover, :focus)::after {
+  clip-path: polygon(
+      /* top-left 1 */
+      calc(100% - var(--border-width))
+      calc(100% - calc(var(--edge-size) + var(--border-width) * .5)),
+      /* top-left 2 */
+      calc(100% - var(--border-width))
+      var(--border-width),
+      /* top-right */
+      calc(100% - var(--border-width))
+      var(--border-width),
+      /* bottom-right 1 */
+      calc(100% - var(--border-width))
+      calc(100% - calc(var(--edge-size) + var(--border-width) * .5)),
+      /* bottom-right 2 */
+      calc(100% - calc(var(--edge-size) + var(--border-width) * .5))
+      calc(100% - var(--border-width)),
+      /* bottom-left */
+      calc(100% - calc(var(--edge-size) + var(--border-width) * .5))
+      calc(100% - var(--border-width))
+      );
 }
 
 /* Table */

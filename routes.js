@@ -1,4 +1,5 @@
-var express = require('express')
+var express = require('express');
+const app = require('./app');
 var router = express.Router()
 
 async function getData(req, res, next, controllerFile, pugFile) {
@@ -35,26 +36,6 @@ function addStatic(route, pugFile, title) {
     });
 }
 
-function addPost(route, controllerFile, pugFile) {
-    if (pugFile === undefined) pugFile = controllerFile;
-    router.post(route, (req, res, next) => {
-        postData(req, res, next, controllerFile, pugFile)
-    });
-}
-
-async function postData(req, res, next, controllerFile, pugFile) {
-    try {
-        const filepath = res.app.root + '/controllers/' + controllerFile + '.js';
-        const controller = require(filepath);
-        const data = await controller(req, res);
-        if (data) res.render(pugFile, data);
-        res.render('/');
-    } catch (e) {
-        console.log(e);
-    }
-}
-
-
 addGet('/', 'home');
 addGet('/corps/', 'corps');
 addGet('/allis/', 'allis');
@@ -64,14 +45,13 @@ addGet('/alliance/:id', 'alliance');
 
 addStatic('/info/', 'info', '说明');
 addStatic('/donate/', 'donate', '捐赠');
-addStatic('/submit/', 'submit', '添加');
-
-addPost('/post', 'submit', 'submit')
 
 router.get('/autocomplete/', async function(req, res, next) {
     console.log(req.query.query)
     const controller = require(res.app.root + '/controllers/autocomplete.js');
     await controller(req, res);
 });
+
+// form route
 
 module.exports = router;
