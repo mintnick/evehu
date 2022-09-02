@@ -45,6 +45,7 @@ addGet('/alliance/:id', 'alliance');
 
 addStatic('/info/', 'info', '说明文档');
 addStatic('/donate/', 'donate', '捐赠');
+addStatic('/projects/', 'projects', '其它项目');
 
 router.get('/autocomplete/', async function(req, res, next) {
     console.log(req.query.query)

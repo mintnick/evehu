@@ -13,21 +13,22 @@ exports.post = async function (req, res, next) {
 
     // if already exsits
     let id = await req.app.mysql.queryField('id', `select ${type}_id id from ${type}s where name = "${name}"`);
-        if (id) {
-            res.redirect(`/${type}/${id}`);
-            return;
-    }
-
-    id = await esi.search(req.app, type, name);
     if (id) {
-        const controller = require(`../models/${type}s.js`);
-        await controller.add(req.app, id);
         link = `/${type}/${id}`;
-        msg = `已添加，感谢你的贡献，`;
-        style = "msg-success";
+        msg = `该数据已存在，`;
+        style = 'msg-success';
     } else {
-        msg = "无效的名称，请检查名称和选择的类型";
-        style = "msg-fail";
+        id = await esi.search(req.app, type, name);
+        if (id) {
+            const controller = require(`../models/${type}s.js`);
+            await controller.add(req.app, id);
+            link = `/${type}/${id}`;
+            msg = `已添加，感谢你的贡献，`;
+            style = "msg-success";
+        } else {
+            msg = "无效的名称，请检查名称和选择的类型";
+            style = "msg-fail";
+        }
     }
 
     res.render('submit',
