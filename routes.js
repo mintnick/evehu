@@ -21,10 +21,10 @@ async function getData(req, res, next, controllerFile, pugFile) {
     }
 }
 
-function addGet(route, controllerFile, pugFile) {
+function addGet(route, controllerFile, pugFile, age=600) {
     if (pugFile === undefined) pugFile = controllerFile;
     router.get(route, (req, res, next) => {
-        res.set('Cache-Control', 'public, max-age=600');
+        res.set('Cache-Control', `public, max-age=${age}`);
         getData(req, res, next, controllerFile, pugFile)
     });
 }
@@ -37,11 +37,9 @@ function addStatic(route, pugFile, title) {
 }
 
 addGet('/', 'home');
-addGet('/corps/', 'corps');
-addGet('/allis/', 'allis');
 addGet('/character/:id', 'character');
-addGet('/corporation/:id', 'corporation');
-addGet('/alliance/:id', 'alliance');
+addGet('/corporation/:id', 'corporation', 'corporation', 1800);
+addGet('/alliance/:id', 'alliance', 'alliance', 1800);
 
 addStatic('/info/', 'info', '说明文档');
 addStatic('/donate/', 'donate', '捐赠');
