@@ -5,11 +5,12 @@ var cookieParser = require('cookie-parser');
 // var logger = require('morgan');
 var redis = require('async-redis').createClient();
 var MySQLDB = require('./models/mysqldb.js');
-var bodyParser = require('body-parser');
+const phin = require('phin').defaults({'method': 'get', 'headers': { 'User-Agent': 'evehu' }})
 
 var indexRouter = require('./routes.js');
 
 var app = express();
+
 app.root = __dirname;
 app.redis = redis;
 app.mysql = new MySQLDB({
@@ -18,6 +19,7 @@ app.mysql = new MySQLDB({
   password: 'password',
   database: 'evehu'
 });
+app.phin = phin;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,9 +30,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 
 app.use(async function(req, res, next) {
   let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;

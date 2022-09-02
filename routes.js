@@ -52,6 +52,12 @@ router.get('/autocomplete/', async function(req, res, next) {
     await controller(req, res);
 });
 
-// form route
+// form routes
+const submitController = require('./controllers/submit.js');
+router.get('/submit', submitController.get);
+router.post('/submit', submitController.post);
+// router.post('/submit', (req, res, next) => {
+//     console.log(req)
+// });
 
 module.exports = router;

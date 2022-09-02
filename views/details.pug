@@ -30,7 +30,7 @@ mixin details(details, type, id)
                 .div
                   a(href='/alliance/'+details.alliance_id)= details.alli_name
 
-      if type == 'alliance'
+      if type == 'alliance' && creator_corp != null && exec_corp !=null
         tr
           td
             h5 创始公司
@@ -48,7 +48,7 @@ mixin details(details, type, id)
             h5 公司数量
           td
             h5= details.corp_count
-      if type == 'alliance' || type == 'corporation'
+      if (type == 'alliance' || type == 'corporation') && creator != null
         tr
           td
             h5 创始人

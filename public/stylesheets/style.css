@@ -53,7 +53,7 @@ nav {
   isolation: isolate;
 
   display: inline-grid;
-  padding: 0.5em 1.5em;
+  padding: 0.4em 1.5em;
   border: 0;
   background-color: var(--background);
   clip-path: polygon(
@@ -216,10 +216,6 @@ h2.title {
 }
 
 /* Submit form */
-/* .submit-form .row {
-  width: 50%;
-} */
-
 .submit-radio label {
   display: block;
   text-align: center;
@@ -265,4 +261,12 @@ input#name {
 .submit-btn {
   min-width: 150px;
   font-size: 1.5rem;
+}
+
+.msg-success {
+  color:rgb(100, 161, 88);
+}
+
+.msg-fail {
+  color:rgb(213, 188, 46);
 }

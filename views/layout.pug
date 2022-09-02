@@ -16,27 +16,26 @@ html
 
     link(rel='stylesheet', href='/stylesheets/style.css')
 
-  body.dark
+  body.dark.d-flex.flex-column.min-vh-100
     include toast.pug
 
     div.wrapper
       include navbar.pug
       
-    div.container
+    div.container.mb-5
       block content
 
-    div.container.mt-5
-      footer.footer
-        small
-          center
-            | Based on 
-            a(href='https://github.com/zKillboard/evewho') zkillboard/Eve Who
-            |  by Squizz
-            br
-            | Modified by 
-            a(href='https://github.com/mintnick') mintnick
-            br
-            | 本网站的游戏内数据，所有权属于CCP Games和网易游戏
+    footer.footer.mt-auto
+      small
+        center
+          | Based on 
+          a(href='https://github.com/zKillboard/evewho') zkillboard/Eve Who
+          |  by Squizz
+          br
+          | Modified by 
+          a(href='https://github.com/mintnick') mintnick
+          br
+          | 本网站的游戏内数据，所有权属于CCP Games和网易游戏
 
     script(src='/javascripts/jquery-3.6.0.min.js')
     script(src='/javascripts/bootstrap/popper.min.js')

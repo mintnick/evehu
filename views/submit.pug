@@ -5,24 +5,29 @@ block content
     h1 添加缺失数据
   .d-flex.justify-content-center.mt-4
     div(style="width: 50%;")
-      form(action="/submit_post/" type="post")
+      form(action="" method="post")
         .d-flex.justify-content-center
           h4 类型
         .row.justify-content-md-center
           .col-sm.submit-radio
-            input#radio-char(type="radio" name="char" checked="checked")
+            input#radio-char(type="radio" name="type" value="character" checked="checked")
             label(for="radio-char") 角色
           .col-sm.submit-radio
-            input#radio-corp(type="radio" name="corp")
+            input#radio-corp(type="radio" name="type" value="corporation")
             label(for="radio-corp") 公司
           .col-sm.submit-radio
-            input#radio-alli(type="radio" name="alli")
+            input#radio-alli(type="radio" name="type" value="alliance")
             label(for="radio-alli") 联盟
         .row.mt-4
           .form-group
             .d-flex.justify-content-center
               h4 名称
-            input.form-control#name(type="text")
+            input.form-control#name(type="text" name="name")
         .row.justify-content-md-center.mt-5
           .col-md-auto
             button.submit-btn.btn.btn-primary(type="submit") 提交
+        if message && message != ""
+          .row.mt-5
+            h4(class=style)=message
+              if link && link != ""
+                a(href=link, style="text-decoration: none;") 点击此处查看
