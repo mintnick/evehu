@@ -1,4 +1,19 @@
 extends layout
 
 block content
-  h1 showmethemoney
+  h1 捐赠
+  br
+  h4 你可以进行捐赠，帮助本网站存续下去
+  .row.justify-content-around.mt-5.qr-section
+    .col-4
+      .card.text-center.w-75
+        .card-header 
+          h3 微信
+        .card-body
+          img(src="/images/qr_alipay.jpg")
+    .col-4
+      .card.text-center.w-75
+        .card-header 
+          h3 支付宝
+        .card-body
+          img(src="/images/qr_wechat.jpg")

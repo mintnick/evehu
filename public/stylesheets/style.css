@@ -270,3 +270,15 @@ input#name {
 .msg-fail {
   color:rgb(213, 188, 46);
 }
+
+/* Donate page */
+.qr-section img{
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+  max-height: 250px;
+}
+
+.qr-section {
+  color: black;
+}
