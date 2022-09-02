@@ -1,0 +1,32 @@
+extends layout 
+
+block content
+  h1 EVE户说明文档
+  br
+
+  h3#about 关于EVE户
+  p EVE户是一个通过ESI的
+    b 公开数据
+    |，分析公司、联盟人员变动的网站，灵感来自宁静服务器的
+    a(href="https://evewho.com/" target="_blank") EVEWho
+    |。
+
+  h3#code 代码
+  p EVE户的代码基于EVEWho的
+    a(href="https://github.com/zKillboard/evewho" target="_blank") 开源代码
+    |，来自zKillboard的作者Squizz。
+  p 主要的改动有
+  ul
+    li 外观重做
+    li 增加了公司的雇佣记录
+    li 增加了一些表格，如新联盟、新公司、新角色、最近雇佣变动
+    li 删除了一些表格，如团体安全等级
+    li 整体架构更偏向MVC
+    li 读取、处理数据的方式，受限于国服没有更有效的第三方API
+    li 更新数据的频率，受限于较低的服务器性能
+    li 提供了让玩家帮忙补充数据的表单
+  h3#privacy 数据隐私
+  p 本网站的所有数据，均来自ESI的公开数据。
+  p 如果你不希望自己的数据出现，请联系CCP Games和网易游戏。
+  h3#delay 数据延迟
+  p 受限于入门级服务器较低的性能，网站的数据可能会和实际数据之间有延迟，仅供参考。

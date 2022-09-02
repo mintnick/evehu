@@ -43,7 +43,7 @@ addGet('/character/:id', 'character');
 addGet('/corporation/:id', 'corporation');
 addGet('/alliance/:id', 'alliance');
 
-addStatic('/info/', 'info', '说明');
+addStatic('/info/', 'info', '说明文档');
 addStatic('/donate/', 'donate', '捐赠');
 
 router.get('/autocomplete/', async function(req, res, next) {

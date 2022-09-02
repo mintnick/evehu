@@ -8,6 +8,7 @@ async function formatData(data) {
     if (data['alliance_id'] === undefined) data['alliance_id'] = null;
     if (data['faction_id'] === undefined) data['faction_id'] = null
     data['security_status'].toFixed(2);
+    if (data['corporation_id'] == 1000001) data['name'] += '(已删除)';
     return data;
 }
 
