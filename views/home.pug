@@ -2,6 +2,7 @@ extends layout
 include delta_list.pug
 include new_entity_list.pug
 include moving_char_list.pug
+include moving_corp_list.pug
 
 block content
   h2.title 联盟
@@ -22,6 +23,11 @@ block content
       +delta('7日内增长', growing_corporations, 'corporation', 'up')
     div.col-sm
       +delta('7日内下降', shrinking_corporations, 'corporation', 'down')
+  div.row.mb-2
+    div.col-sm
+      +moving_corp('最近加入', recent_corp_joining, 'join')
+    div.col-sm
+      +moving_corp('最近离开', recent_corp_leaving, 'leave')
   div.row.mb-2
     div.col-sm
       +delta('角色数量', large_corporations, 'corporation', 'total')

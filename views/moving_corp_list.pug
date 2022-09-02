@@ -1,0 +1,27 @@
+include image.pug
+
+mixin moving_corp(title, contents, type)
+  div.table-responsive
+    h5(class=type) #{title}&nbsp&nbsp
+      img(src='/images/change.svg', width= 30, height= 30, alt='').lazy
+    table.table.table-bordered.table-dark.table-hover.align-middle
+      thead.thead-light
+        tr
+          th.image
+          th.text-center 公司
+          if type == 'join'
+            th.text-center.join 加入
+          else if type == 'leave'
+            th.text-center.leave 离开
+          th.text-center 时间
+      tbody
+        if contents != undefined
+          each row in contents
+            tr
+              td.image
+                +image('corporation', row.co_id, 48, row.co_name)
+              td
+                a(href='/corporation/' + row.co_id)= row.co_name
+              td.text-center.small
+                a(href='/alliance/' + row.a_id)= row.a_name
+              td.text-center.small= row.date

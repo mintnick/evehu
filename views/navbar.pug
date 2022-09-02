@@ -14,7 +14,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
         li.nav-item
           a.nav-link(href='/submit') 补充数据
       form(onsubmit= 'return false;' accept-charset="GB18030").d-flex.col-5
-        input.form-control.me-2(type='search', name='name', id='autocomplete' placeholder='输入 角色/公司/联盟,稍等片刻' aria-label='Search')
+        input.form-control.me-2(type='search', name='name', id='autocomplete' placeholder='输入 角色/公司/联盟名称，稍等片刻' aria-label='Search')
       ul.navbar-nav.mb-2.mb-lg-0.col-2.ps-2
         li.nav-item
           .btn-group
@@ -22,6 +22,10 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
             button.btn.btn-secondary.dropdown-toggle.dropdown-toggle.split(type="button" data-bs-toggle="dropdown" aria-expanded="false")
               span.visually-hidden Toggle Dropdown
             ul.dropdown-menu(aria-labelledby="dropdownMenuLink")
+              li
+                a.dropdown-item(href="/info#about") 关于EVE户
+              li
+                a.dropdown-item(href="/info#code") 代码
               li
                 a.dropdown-item(href="/info#privacy") 数据隐私
               li

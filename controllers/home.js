@@ -8,6 +8,8 @@ const titles = [
     'growing_corporations',
     'shrinking_corporations',
     'new_corporations',
+    'recent_corp_joining',
+    'recent_corp_leaving',
 
     'new_characters',
     'recent_char_joining',
