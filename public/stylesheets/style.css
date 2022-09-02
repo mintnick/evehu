@@ -1,9 +1,10 @@
 html {
   font-size: 16px;
-  --join: rgb(93, 151, 36);
-  --leave: chocolate;
-  --up: rgb(177, 52, 61);
-  --down: rgb(91, 148, 79);
+  --join: #FFEB3B;
+  --leave: #7E57C2;
+  --up: #F44336;
+  --down: #4CAF50;
+  --title: #EFEBE9;
   --btnSelect: rgb(38, 77, 124);
 }
 
@@ -189,7 +190,7 @@ table tr > td.image {
 }
 
 h2.title {
-  color: gold;
+  color: var(--title);
 }
 
 .table>:not(caption)>*>* {
