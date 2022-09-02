@@ -29,27 +29,28 @@ let init = [
     // 'get/get_npc_corporations.js'
 
     // 'clear_characters.js',
+    // 'util/rename_npc_corps.js'
 ]
 
 // {filename : seconds}
 let tasks = {
-    'get/get_old_entities_char.js': 2,
+    'get/get_old_entities_char.js': 5,
     // // 'get_old_characters.js': 1, // finished
-    'get/get_characters.js': 60,
+    'get/get_characters.js': 30,
     'get/get_corporations.js': 600,
-    'get/get_alliances.js': 1200,
+    'get/get_alliances.js': 1800,
 
     // 'update/update_characters.js': 5,
     'update/update_corporations.js': 60,
-    'update/update_alliances.js': 120,
+    'update/update_alliances.js': 600,
 
-    'update/update_delta.js': 14400, // (4am - 8am)
+    'update/update_delta.js': 14400, // (3am - 7am)
     'update/update_redis_home.js': 600,
     'update/update_char_by_affiliation.js': 10,
 
     'util/populate_missing_entities.js': 10,
-    'util/populate_redis_affiliation.js': 1200,
-    'util/populate_char_history.js': 15,
+    'util/populate_redis_affiliation.js': 600,
+    // 'util/populate_char_history.js': 15,
 };
 
 function initialize() {

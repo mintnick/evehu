@@ -99,7 +99,7 @@ async function updateHistory(app, char_id) {
         }
 
         await app.mysql.query(
-            'update characters set history_update = NOW() where character_id = ?',
+            'update characters set last_update = NOW() where character_id = ?',
             [char_id]
         );
     } catch (e) {

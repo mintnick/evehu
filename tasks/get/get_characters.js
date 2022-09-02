@@ -12,7 +12,7 @@ module.exports = async function (app) {
         if (!id) id = 2112000000;
         id += 1;
         // let id = parseInt(await fs.readFile(path).toString());
-        const next = id + 10;
+        const next = id + 5;
         while (id < next && id < max) {
             await characters.add(app, id);
             id++;
