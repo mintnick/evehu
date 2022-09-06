@@ -43,7 +43,11 @@ async function add(app, corp_id) {
 async function update(app, corp_id) {
     try {
         let data = await esi(app, 'corp', corp_id);
-        if (!data) return;
+        if (!data) {
+            await app.mysql.query(`update corporations set last_update = NOW() where corporation_id = ${corp_id}`);
+            console.log('ESI get null: corp ' + corp_id);
+            return;
+        }
 
         data = await formatData(data);
         const {alliance_id, ceo_id, member_count, is_deleted} = data;

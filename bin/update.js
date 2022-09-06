@@ -34,7 +34,7 @@ let init = [
 
 // {filename : seconds}
 let tasks = {
-    'get/get_old_entities_char.js': 5,
+    'get/get_old_entities_char.js': 15,
     // // 'get_old_characters.js': 1, // finished
     'get/get_characters.js': 30,
     'get/get_corporations.js': 600,
@@ -48,7 +48,7 @@ let tasks = {
     'update/update_redis_home.js': 600,
     'update/update_char_by_affiliation.js': 10,
 
-    'util/populate_missing_entities.js': 10,
+    'util/populate_missing_entities.js': 20,
     'util/populate_redis_affiliation.js': 600,
     // 'util/populate_char_history.js': 15,
 };

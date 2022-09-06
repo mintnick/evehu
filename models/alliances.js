@@ -29,7 +29,11 @@ async function add(app, alli_id) {
 async function update(app, alli_id) {
     try {
         let data = await esi(app, 'alli', alli_id);
-        if (!data) return;
+        if (!data) {
+            await app.mysql.query(`update alliances set last_update = NOW() where alliance_id = ${alli_id}`);
+            console.log('ESI get null: alli ' + corp_id);
+            return;
+        }
 
         const corps = await esi(app, 'alli', id + '/corporations');
         if (corps && corps.length == 0) {
