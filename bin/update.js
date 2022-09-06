@@ -48,7 +48,7 @@ let tasks = {
     'update/update_redis_home.js': 600,
     'update/update_char_by_affiliation.js': 10,
 
-    'util/populate_missing_entities.js': 20,
+    'util/populate_missing_entities.js': 30,
     'util/populate_redis_affiliation.js': 600,
     // 'util/populate_char_history.js': 15,
 };

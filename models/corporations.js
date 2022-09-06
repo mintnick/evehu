@@ -68,7 +68,11 @@ async function update(app, corp_id) {
 async function updateHistory(app, corp_id) {
     try {
         let data = await esi(app, 'corp', corp_id + '/alliancehistory');
-        if (!data || data.length == 0) return;
+        if (!data || data.length == 0) {
+            await app.mysql.query(`update corporations set last_update = NOW() where corporation_id = ${corp_id}`);
+            console.log('ESI get null: corp history' + corp_id);
+            return;
+        }
 
         let i = 0;
         const last_record_id = data[i].record_id;

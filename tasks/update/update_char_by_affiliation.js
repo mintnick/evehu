@@ -24,7 +24,7 @@ module.exports = async function (app) {
                 if (aff_corp_id == last_corp_id) continue;
                 
                 await characters.update(app, ids[i]);
-                await app.sleep(1);
+                await app.sleep(10);
             }
         } finally {
             flag = false;

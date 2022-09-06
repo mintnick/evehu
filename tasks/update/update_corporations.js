@@ -12,6 +12,6 @@ module.exports = async function (app) {
     ids = ids.map(id => id.corporation_id);
     for (const id of ids) {
         await corporations.update(app, id);
-        await app.sleep(1);
+        await app.sleep(100);
     }
 };

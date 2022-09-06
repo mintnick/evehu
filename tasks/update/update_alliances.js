@@ -13,6 +13,6 @@ module.exports = async function (app) {
     ids = ids.map(id => id.alliance_id);
     for (id of ids) {
         await alliances.update(app, id);
-        await app.sleep(1);
+        await app.sleep(100);
     }
 };

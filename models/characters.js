@@ -65,7 +65,11 @@ async function update(app, char_id) {
 async function updateHistory(app, char_id) {
     try {
         let data = await esi(app, 'char', char_id + '/corporationhistory');
-        if (!data || data.length == 0) return;
+        if (!data || data.length == 0) {
+            await app.mysql.query(`update characters set last_update = NOW() where character_id = ${char_id}`);
+            console.log('ESI get null: char history' + char_id);
+            return;
+        }
 
         // console.log(data);
         const last_record_id = data[0].record_id;
