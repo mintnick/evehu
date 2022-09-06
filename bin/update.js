@@ -74,16 +74,18 @@ async function runTask(task, func, app, runKey) {
 }
 
 async function update(app, tasks) {
-    for (const [task, interval] of Object.entries(tasks)) {
-        const curKey = 'crinstance:current:' + task + ":" + interval;
-        const runKey = 'crinstance:running:' + task;
-
-        if (await app.redis.get(curKey) != 'true' && await app.redis.get(runKey) != 'true') {
-            await app.redis.setex(curKey, interval || 600, 'true');
-            await app.redis.setex(runKey, 600, 'true');
-
-            const func = require('../tasks/' + task);
-            setTimeout(() => {runTask(task, func, app, runKey); }, 1);
+    if (app.isDowntime() == false) {
+        for (const [task, interval] of Object.entries(tasks)) {
+            const curKey = 'crinstance:current:' + task + ":" + interval;
+            const runKey = 'crinstance:running:' + task;
+    
+            if (await app.redis.get(curKey) != 'true' && await app.redis.get(runKey) != 'true') {
+                await app.redis.setex(curKey, interval || 600, 'true');
+                await app.redis.setex(runKey, 600, 'true');
+    
+                const func = require('../tasks/' + task);
+                setTimeout(() => {runTask(task, func, app, runKey); }, 1);
+            }
         }
     }
 
