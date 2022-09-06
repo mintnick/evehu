@@ -17,7 +17,7 @@ app.debug = false;
 app.sleep = (ms) => { return new Promise(resolve=>{ setTimeout(resolve,ms) });}
 app.isDowntime = () => {
     const date = new Date();
-    const hour = date.getHours();
+    const hour = ('0' + date.getHours()).slice(-2);
     const minute = date.getMinutes();
     const time = hour + minute;
     return (time >= '1055' && time <= '1130');
@@ -87,6 +87,9 @@ async function update(app, tasks) {
                 setTimeout(() => {runTask(task, func, app, runKey); }, 1);
             }
         }
+    } else {
+        console.log('Server down, waiting');
+        await app.sleep(30000);
     }
 
     if (app.debug == false) update(app, tasks);
