@@ -10,7 +10,6 @@ module.exports = async function (app) {
         const next = id + 3;
         while (id < next && id < 100000000) {
             await alliances.add(app, id);
-            await app.sleep(100);
             id++;
         }
     } catch (e) {

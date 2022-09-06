@@ -20,7 +20,7 @@ app.isDowntime = () => {
     const hour = ('0' + date.getHours()).slice(-2);
     const minute = date.getMinutes();
     const time = hour + minute;
-    return (time >= '1055' && time <= '1130');
+    return (time >= '1055' && time <= '1115');
 }
 
 let init = [
@@ -34,7 +34,7 @@ let init = [
 
 // {filename : seconds}
 let tasks = {
-    'get/get_old_entities_char.js': 15,
+    // 'get/get_old_entities_char.js': 15,
     // // 'get_old_characters.js': 1, // finished
     'get/get_characters.js': 30,
     'get/get_corporations.js': 600,
@@ -48,9 +48,14 @@ let tasks = {
     'update/update_redis_home.js': 600,
     'update/update_char_by_affiliation.js': 10,
 
-    'util/populate_missing_entities.js': 30,
+    // 'util/populate_missing_entities.js': 30,
     'util/populate_redis_affiliation.js': 600,
     // 'util/populate_char_history.js': 15,
+};
+
+let secondTasks = {
+    'get/get_old_entities_char.js': 5,
+    'util/populate_missing_entities.js': 10,
 };
 
 function initialize() {
@@ -73,26 +78,30 @@ async function runTask(task, func, app, runKey) {
     }
 }
 
-async function update(app, tasks) {
-    if (app.isDowntime() == false) {
-        for (const [task, interval] of Object.entries(tasks)) {
-            const curKey = 'crinstance:current:' + task + ":" + interval;
-            const runKey = 'crinstance:running:' + task;
-    
-            if (await app.redis.get(curKey) != 'true' && await app.redis.get(runKey) != 'true') {
-                await app.redis.setex(curKey, interval || 600, 'true');
-                await app.redis.setex(runKey, 600, 'true');
-    
-                const func = require('../tasks/' + task);
-                setTimeout(() => {runTask(task, func, app, runKey); }, 1);
-            }
+async function update(app, task_list) {
+    for (const [task, interval] of Object.entries(task_list)) {
+        const curKey = 'crinstance:current:' + task + ":" + interval;
+        const runKey = 'crinstance:running:' + task;
+
+        if (await app.redis.get(curKey) != 'true' && await app.redis.get(runKey) != 'true') {
+            await app.redis.setex(curKey, interval || 600, 'true');
+            await app.redis.setex(runKey, 600, 'true');
+
+            const func = require('../tasks/' + task);
+            setTimeout(() => {runTask(task, func, app, runKey); }, 1);
         }
-    } else {
-        console.log('Server down, waiting');
-        await app.sleep(30000);
     }
 
-    if (app.debug == false) update(app, tasks);
+    if (app.debug == false) {
+        if (app.isDowntime()) {
+            console.log('Server down, waiting');
+            await app.sleep(30000);
+        } else if (Math.random() < 0.3) {
+            update(app, secondTasks);
+        } else {
+            update(app, tasks);
+        }
+    }
 }
 
 async function clearRunKeys(app) {

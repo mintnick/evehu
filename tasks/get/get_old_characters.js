@@ -11,7 +11,6 @@ module.exports = async function (app) {
         const next = id + 10;
         while (id < next && id < 98000000) {
             await characters.add(app, id, data);
-            await app.sleep(1);
             id++;
         }
         await fs.writeFile(path, id.toString());

@@ -13,7 +13,6 @@ module.exports = async function f(app) {
             id++;
         }
         await fs.writeFile(path, id.toString());
-        await app.sleep(100);
 
         // let id = 102149490;
         // let data = await esi(app, 'char', id);

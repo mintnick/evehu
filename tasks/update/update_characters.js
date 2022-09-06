@@ -12,7 +12,6 @@ module.exports = async function (app) {
     ids = ids.map(id => id.character_id);
     for (const id of ids) {
         await characters.update(app, id);
-        await app.sleep(1);
     }
 
     // testing
