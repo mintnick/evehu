@@ -67,7 +67,7 @@ function initialize() {
 
 async function runTask(task, func, app, runKey) {
     try {
-        // console.log('Start: ' + task);
+        console.log(task + ' starts');
         await func(app);
     } catch (e) {
         console.log(task + ' failure:');
@@ -79,29 +79,26 @@ async function runTask(task, func, app, runKey) {
 }
 
 async function update(app, task_list) {
-    for (const [task, interval] of Object.entries(task_list)) {
-        const curKey = 'crinstance:current:' + task + ":" + interval;
-        const runKey = 'crinstance:running:' + task;
+    if (app.isDowntime() == false) {
 
-        if (await app.redis.get(curKey) != 'true' && await app.redis.get(runKey) != 'true') {
-            await app.redis.setex(curKey, interval || 600, 'true');
-            await app.redis.setex(runKey, 600, 'true');
-
-            const func = require('../tasks/' + task);
-            setTimeout(() => {runTask(task, func, app, runKey); }, 1);
+        for (const [task, interval] of Object.entries(task_list)) {
+            const curKey = 'crinstance:current:' + task + ":" + interval;
+            const runKey = 'crinstance:running:' + task;
+    
+            if (await app.redis.get(curKey) != 'true' && await app.redis.get(runKey) != 'true') {
+                await app.redis.setex(curKey, interval || 600, 'true');
+                await app.redis.setex(runKey, 600, 'true');
+    
+                const func = require('../tasks/' + task);
+                setTimeout(() => {runTask(task, func, app, runKey); }, 1);
+            }
         }
+    } else {
+        console.log('server down, waiting');
+        app.sleep(300000);
     }
 
-    if (app.debug == false) {
-        if (app.isDowntime()) {
-            console.log('Server down, waiting');
-            await app.sleep(30000);
-        } else if (Math.random() < 0.3) {
-            update(app, secondTasks);
-        } else {
-            update(app, tasks);
-        }
-    }
+    if (app.debug == false) update(app, task_list);
 }
 
 async function clearRunKeys(app) {
@@ -111,7 +108,8 @@ async function clearRunKeys(app) {
     keys = await app.redis.keys('crinstance:current*');
     for (const key of keys) await app.redis.del(key);
 
-    setTimeout(() => { update(app, tasks); }, 1);
+    // setTimeout(() => { update(app, tasks); }, 1);
+    setTimeout(() => { update(app, secondTasks); }, 1);
 }
 
 async function debug(task) {
