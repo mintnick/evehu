@@ -11,5 +11,8 @@ module.exports = async function (app) {
     if (ids.length == 0) return;
 
     ids = ids.map(id => id.alliance_id);
-    for (id of ids) await alliances.update(app, id);
+    for (id of ids) {
+        await alliances.update(app, id);
+        await app.sleep(1);
+    }
 };

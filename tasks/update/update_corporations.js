@@ -10,5 +10,8 @@ module.exports = async function (app) {
             'limit 100');
     if (ids.length == 0) return;
     ids = ids.map(id => id.corporation_id);
-    for (const id of ids) await corporations.update(app, id);
+    for (const id of ids) {
+        await corporations.update(app, id);
+        await app.sleep(1);
+    }
 };

@@ -31,7 +31,7 @@ async function update(app, alli_id) {
         let data = await esi(app, 'alli', alli_id);
         if (!data) {
             await app.mysql.query(`update alliances set last_update = NOW() where alliance_id = ${alli_id}`);
-            console.log('ESI get null: alli ' + corp_id);
+            console.log('ESI get null: alli ' + alli_id);
             return;
         }
 

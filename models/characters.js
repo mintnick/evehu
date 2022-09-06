@@ -40,7 +40,11 @@ async function add(app, char_id) {
 async function update(app, char_id) {
     try {
         let data = await esi(app, 'char', char_id);
-        if (!data) return;
+        if (!data) {
+            await app.mysql.query(`update characters set last_update = NOW() where character_id = ${char_id}`);
+            console.log('ESI get null: char ' + char_id);
+            return;
+        }
 
         data = await formatData(data);
         const {alliance_id, corporation_id, security_status, faction_id} = data;

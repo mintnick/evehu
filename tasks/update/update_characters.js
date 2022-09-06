@@ -10,7 +10,10 @@ module.exports = async function (app) {
     if (ids.length == 0) return;
 
     ids = ids.map(id => id.character_id);
-    for (const id of ids) await characters.update(app, id);
+    for (const id of ids) {
+        await characters.update(app, id);
+        await app.sleep(1);
+    }
 
     // testing
     // let ids = await app.mysql.query(

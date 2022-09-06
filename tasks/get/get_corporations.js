@@ -14,6 +14,7 @@ module.exports = async function (app) {
         const next = id + 5;
         while (id < next && id < max) {
             await corporations.add(app, id);
+            await app.sleep(1);
             id++;
         }
         // await fs.writeFile(path, id.toString());
