@@ -22,6 +22,11 @@ app.isDowntime = () => {
     const time = hour + minute;
     return (time >= '1055' && time <= '1115');
 }
+app.isLateNight = () => {
+    const date = new Date();
+    const hour = date.getHours();
+    return (hour > 0 && hour < 8);
+}
 
 let init = [
     // 'get/get_active_alliances.js',
@@ -78,10 +83,10 @@ async function runTask(task, func, app, runKey) {
     }
 }
 
-async function update(app, task_list) {
+async function update(app, taskList) {
     if (app.isDowntime() == false) {
 
-        for (const [task, interval] of Object.entries(task_list)) {
+        for (const [task, interval] of Object.entries(taskList)) {
             const curKey = 'crinstance:current:' + task + ":" + interval;
             const runKey = 'crinstance:running:' + task;
     
@@ -98,7 +103,13 @@ async function update(app, task_list) {
         app.sleep(300000);
     }
 
-    if (app.debug == false) update(app, task_list);
+    if (app.debug == false) {
+        if (app.isLateNight()) {
+            update(app, secondTasks);
+        } else {
+            update(app, tasks);
+        }
+    }
 }
 
 async function clearRunKeys(app) {
@@ -108,8 +119,7 @@ async function clearRunKeys(app) {
     keys = await app.redis.keys('crinstance:current*');
     for (const key of keys) await app.redis.del(key);
 
-    // setTimeout(() => { update(app, tasks); }, 1);
-    setTimeout(() => { update(app, secondTasks); }, 1);
+    setTimeout(() => { update(app, tasks); }, 1);
 }
 
 async function debug(task) {
