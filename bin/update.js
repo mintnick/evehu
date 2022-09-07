@@ -49,7 +49,7 @@ let tasks = {
     'update/update_corporations.js': 60,
     'update/update_alliances.js': 600,
 
-    'update/update_delta.js': 14400, // (3am - 7am)
+    // 'update/update_delta.js': 14400, // (3am - 7am)
     'update/update_redis_home.js': 600,
     'update/update_char_by_affiliation.js': 10,
 
@@ -61,6 +61,8 @@ let tasks = {
 let secondTasks = {
     'get/get_old_entities_char.js': 5,
     'util/populate_missing_entities.js': 10,
+    
+    'update/update_delta.js': 14400, // (3am - 7am)
 };
 
 function initialize() {
@@ -100,14 +102,14 @@ async function update(app, taskList) {
         }
     } else {
         console.log('server down, waiting');
-        app.sleep(300000);
+        await app.sleep(300000);
     }
 
     if (app.debug == false) {
         if (app.isLateNight()) {
-            update(app, secondTasks);
+            await update(app, secondTasks);
         } else {
-            update(app, tasks);
+            await update(app, tasks);
         }
     }
 }
