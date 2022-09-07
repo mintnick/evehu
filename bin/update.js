@@ -105,11 +105,12 @@ async function update(app, taskList) {
         await app.sleep(300000);
     }
 
+    await app.sleep(Math.min(1000, Date.now() - now));
     if (app.debug == false) {
         if (app.isLateNight()) {
-            await update(app, secondTasks);
+            update(app, secondTasks);
         } else {
-            await update(app, tasks);
+            update(app, tasks);
         }
     }
 }
