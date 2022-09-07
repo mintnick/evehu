@@ -59,8 +59,8 @@ let tasks = {
 };
 
 let secondTasks = {
-    'get/get_old_entities_char.js': 5,
-    'util/populate_missing_entities.js': 10,
+    'get/get_old_entities_char.js': 3,
+    'util/populate_missing_entities.js': 15,
     
     'update/update_delta.js': 14400, // (3am - 7am)
 };

@@ -2,7 +2,6 @@
 const characters = require('../../models/characters.js');
 const corporations = require('../../models/corporations.js');
 const alliances = require('../../models/alliances.js');
-const esi = require('../../models/esi.js');
 
 const fs = require('fs/promises');
 
@@ -18,7 +17,7 @@ module.exports = async function (app) {
         if (min >= max) return;
 
         let id = min;
-        const next = min + 100;
+        const next = min + 1000;
         let ids = await app.mysql.query(`select character_id from characters where character_id > ${min} and character_id < ${next}`);
         ids = ids.map(x => x.character_id);
         while (id < next && id < max) {
@@ -28,15 +27,6 @@ module.exports = async function (app) {
             id++;
         }
         await fs.writeFile(path, id.toString());
-
-        // missing history
-        ids = await app.mysql.query(`select character_id from characters where character_id > 90000001 and corporation_id != 1000001 and history_update is NULL limit 10`);
-        if (ids.length > 0) {
-            ids = ids.map(x => x.character_id);
-            for (const id of ids) {
-                await characters.updateHistory(app, id);
-            }
-        }
 
         // missing CEOs
         ids = await app.mysql.query(`select ceo_id from corporations where ceo_id not in (select character_id from characters) limit 10`);
