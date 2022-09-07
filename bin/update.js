@@ -125,7 +125,13 @@ async function clearRunKeys(app) {
     keys = await app.redis.keys('crinstance:current*');
     for (const key of keys) await app.redis.del(key);
 
-    setTimeout(() => { update(app, tasks); }, 1);
+    setTimeout(() => { 
+        if (app.isLateNight()) {
+            update(app, secondTasks);
+        } else {
+            update(app, tasks);
+        }
+    }, 1);
 }
 
 async function debug(task) {

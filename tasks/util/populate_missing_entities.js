@@ -18,7 +18,7 @@ module.exports = async function (app) {
         if (min >= max) return;
 
         let id = min;
-        const next = min + 1000;
+        const next = min + 100;
         let ids = await app.mysql.query(`select character_id from characters where character_id > ${min} and character_id < ${next}`);
         ids = ids.map(x => x.character_id);
         while (id < next && id < max) {
@@ -30,7 +30,7 @@ module.exports = async function (app) {
         await fs.writeFile(path, id.toString());
 
         // missing history
-        ids = await app.mysql.query(`select character_id from characters where is_deleted != 1 and history_update is NULL limit 100`);
+        ids = await app.mysql.query(`select character_id from characters where is_deleted != 1 and history_update is NULL limit 10`);
         if (ids.length > 0) {
             ids = ids.map(x => x.character_id);
             for (const id of ids) {
@@ -39,7 +39,7 @@ module.exports = async function (app) {
         }
 
         // missing CEOs
-        ids = await app.mysql.query(`select ceo_id from corporations where ceo_id not in (select character_id from characters) limit 100`);
+        ids = await app.mysql.query(`select ceo_id from corporations where ceo_id not in (select character_id from characters) limit 10`);
         if (ids.length > 0) {
             ids = ids.map(x => x.ceo_id);
             for (const id of ids) {
@@ -48,7 +48,7 @@ module.exports = async function (app) {
         }
 
         // missing creators
-        ids = await app.mysql.query('select creator_id from alliances where creator_id not in (select character_id from characters) limit 100');
+        ids = await app.mysql.query('select creator_id from alliances where creator_id not in (select character_id from characters) limit 10');
         if (ids.length > 0) {
             ids = ids.map(x => x.creator_id);
             for (const id of ids) {
@@ -61,7 +61,7 @@ module.exports = async function (app) {
             'select distinct(corporation_id) corp_id from corporation_history ' + 
             'where corporation_id not in ' + 
             '(select corporation_id from corporations) ' +
-            'limit 100'
+            'limit 10'
         );
         if (corp_ids.length > 0) {
             corp_ids = corp_ids.map(i => i.corp_id);
@@ -73,7 +73,7 @@ module.exports = async function (app) {
             'select distinct(alliance_id) alli_id from alliance_history ' + 
             'where alliance_id not in ' + 
             '(select alliance_id from alliances) ' +
-            'limit 100'
+            'limit 10'
         );
         if (alli_ids.length > 0) {
             alli_ids = alli_ids.map(i => i.alli_id);
@@ -81,22 +81,22 @@ module.exports = async function (app) {
         }
 
         // allis with NULL member count, get its corps
-        alli_ids = await app.mysql.query(
-            'select alliance_id from alliances '+
-            'where is_deleted != 1 and member_count is null '+
-            'limit 100'
-        );
-        if (alli_ids.length > 0) {
-            alli_ids = alli_ids.map(i => i.alliance_id);
-            for (const id of alli_ids) {
-                const corp_ids = await esi(app, 'alli', id + '/corporations');
-                if (corp_ids && corp_ids.length > 0) {
-                    for (const corp_id of corp_ids) {
-                        await corporations.add(app, corp_id);
-                    }
-                }
-            }
-        }
+        // alli_ids = await app.mysql.query(
+        //     'select alliance_id from alliances '+
+        //     'where is_deleted != 1 and member_count is null '+
+        //     'limit 10'
+        // );
+        // if (alli_ids.length > 0) {
+        //     alli_ids = alli_ids.map(i => i.alliance_id);
+        //     for (const id of alli_ids) {
+        //         const corp_ids = await esi(app, 'alli', id + '/corporations');
+        //         if (corp_ids && corp_ids.length > 0) {
+        //             for (const corp_id of corp_ids) {
+        //                 await corporations.add(app, corp_id);
+        //             }
+        //         }
+        //     }
+        // }
     } catch (e) {
         console.log(e);
     }
