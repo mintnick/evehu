@@ -29,6 +29,15 @@ module.exports = async function (app) {
         }
         await fs.writeFile(path, id.toString());
 
+        // missing history
+        ids = await app.mysql.query(`select character_id from characters where is_deleted != 1 and history_update is NULL limit 100`);
+        if (ids.length > 0) {
+            ids = ids.map(x => x.character_id);
+            for (const id of ids) {
+                await characters.updateHistory(app, id);
+            }
+        }
+
         // missing CEOs
         ids = await app.mysql.query(`select ceo_id from corporations where ceo_id not in (select character_id from characters) limit 100`);
         if (ids.length > 0) {

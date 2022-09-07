@@ -86,6 +86,9 @@ async function runTask(task, func, app, runKey) {
 }
 
 async function update(app, taskList) {
+    let now = Date.now();
+    now = Math.floor(now / 1000);
+    
     if (app.isDowntime() == false) {
 
         for (const [task, interval] of Object.entries(taskList)) {
