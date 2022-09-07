@@ -30,7 +30,7 @@ module.exports = async function (app) {
         await fs.writeFile(path, id.toString());
 
         // missing history
-        ids = await app.mysql.query(`select character_id from characters where is_deleted != 1 and history_update is NULL limit 10`);
+        ids = await app.mysql.query(`select character_id from characters where character_id > 90000001 and corporation_id != 1000001 and history_update is NULL limit 10`);
         if (ids.length > 0) {
             ids = ids.map(x => x.character_id);
             for (const id of ids) {
