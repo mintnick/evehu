@@ -25,7 +25,7 @@ app.isDowntime = () => {
 app.isLateNight = () => {
     const date = new Date();
     const hour = date.getHours();
-    return (hour > 0 && hour < 8);
+    return (hour > 0 && hour < 10);
 }
 
 let init = [
@@ -49,7 +49,7 @@ let tasks = {
     'update/update_corporations.js': 60,
     'update/update_alliances.js': 600,
 
-    'util/populate_redis_affiliation.js': 500,
+    'util/populate_redis_affiliation.js': 100,
     'update/update_char_by_affiliation.js': 5,
 
     'update/update_redis_home.js': 600,

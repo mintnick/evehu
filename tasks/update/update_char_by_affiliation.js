@@ -6,15 +6,18 @@ const aff = 'evehu:affiliates';
 const aff_add = 'evehu:old_address';
 
 module.exports = async function (app) {
-    if (app.isDowntime()) return;
+    if (app.isDowntime() || (await app.redis.llen(aff)) == 0 || (await app.redis.llen(aff_add)) == 0) return;
 
     if (flag == false) {
         flag = true;
         
         try {
-            let chars = await app.redis.lpop(aff, 100);
-            let adds = await app.redis.lpop(aff_add, 100);
-            if (!chars) return;
+            let chars = await app.redis.lpop(aff, 1000);
+            let adds = await app.redis.lpop(aff_add, 1000);
+            if (!chars || !adds) {
+                console.log('Empty aff list');
+                return;
+            }
 
             const ids = chars.map(i => parseInt(i));
             const old_add_ids = adds.map(i => parseInt(i));
@@ -26,7 +29,10 @@ module.exports = async function (app) {
             }
             
             const data = await esi.affiliation(app, ids);
-            if (!data) return;
+            if (!data) {
+                console.log('ESI get null: affliates');
+                return;
+            }
             // console.log(data);
 
             for (let i = 0; i < ids.length; i++) {
@@ -36,7 +42,7 @@ module.exports = async function (app) {
                 // console.log(ids[i] + ' : ' +aff_corp_id + ' : ' + old_corp_id);
                 // const last_corp_id = await app.mysql.queryField('corp_id', `select corporation_id corp_id from characters where character_id = ${ids[i]}`);
                 if (aff_corp_id == old_corp_id) continue;
-                await characters.update(app, ids[i]);
+                characters.update(app, ids[i]);
             }
         } finally {
             flag = false;
