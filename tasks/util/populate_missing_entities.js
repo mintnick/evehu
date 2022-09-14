@@ -29,7 +29,7 @@ module.exports = async function (app) {
         await fs.writeFile(path, id.toString());
 
         // missing CEOs
-        ids = await app.mysql.query(`select ceo_id from corporations where ceo_id not in (select character_id from characters) limit 10`);
+        ids = await app.mysql.query(`select ceo_id from corporations where ceo_id != 1 and corporation_id > 98000000 and ceo_id not in (select character_id from characters) limit 10`);
         if (ids.length > 0) {
             ids = ids.map(x => x.ceo_id);
             for (const id of ids) {
@@ -37,7 +37,16 @@ module.exports = async function (app) {
             }
         }
 
-        // missing creators
+        // missing corp creators
+        ids = await app.mysql.query('select creator_id from corporations where corporation_id > 98000000 and creator_id not in (select character_id from characters) limit 10');
+        if (ids.length > 0) {
+            ids = ids.map(x => x.creator_id);
+            for (const id of ids) {
+                await characters.add(app, id);
+            }
+        }
+
+        // missing alli creators
         ids = await app.mysql.query('select creator_id from alliances where creator_id not in (select character_id from characters) limit 10');
         if (ids.length > 0) {
             ids = ids.map(x => x.creator_id);

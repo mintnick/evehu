@@ -18,7 +18,7 @@ app.sleep = (ms) => { return new Promise(resolve=>{ setTimeout(resolve,ms) });}
 app.isDowntime = () => {
     const date = new Date();
     const hour = ('0' + date.getHours()).slice(-2);
-    const minute = date.getMinutes();
+    const minute = ('0' + date.getMinutes()).slice(-2);
     const time = hour + minute;
     return (time >= '1055' && time <= '1115');
 }
@@ -122,8 +122,8 @@ async function clearRunKeys(app) {
     let keys = await app.redis.keys('crinstance:running*');
     for (const key of keys) await app.redis.del(key);
     
-    keys = await app.redis.keys('crinstance:current*');
-    for (const key of keys) await app.redis.del(key);
+    // keys = await app.redis.keys('crinstance:current*');
+    // for (const key of keys) await app.redis.del(key);
 
     setTimeout(() => { 
         if (app.isLateNight()) {
