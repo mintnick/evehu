@@ -29,28 +29,28 @@ module.exports = async function (app) {
         await fs.writeFile(path, id.toString());
 
         // missing CEOs
-        ids = await app.mysql.query(`select ceo_id from corporations where ceo_id != 1 and corporation_id > 98000000 and ceo_id not in (select character_id from characters) limit 10`);
-        if (ids.length > 0) {
-            ids = ids.map(x => x.ceo_id);
-            for (const id of ids) {
+        let ceo_ids = await app.mysql.query(`select ceo_id from corporations where ceo_id != 1 and corporation_id > 98000000 and ceo_id not in (select character_id from characters) limit 10`);
+        if (ceo_ids.length > 0) {
+            ceo_ids = ceo_ids.map(x => x.ceo_id);
+            for (const id of ceo_ids) {
                 await characters.add(app, id);
             }
         }
 
         // missing corp creators
-        ids = await app.mysql.query('select creator_id from corporations where corporation_id > 98000000 and creator_id not in (select character_id from characters) limit 10');
-        if (ids.length > 0) {
-            ids = ids.map(x => x.creator_id);
-            for (const id of ids) {
+        let creator_ids = await app.mysql.query('select creator_id from corporations where corporation_id > 98000000 and creator_id not in (select character_id from characters) limit 10');
+        if (creator_ids.length > 0) {
+            creator_ids = creator_ids.map(x => x.creator_id);
+            for (const id of creator_ids) {
                 await characters.add(app, id);
             }
         }
 
         // missing alli creators
-        ids = await app.mysql.query('select creator_id from alliances where creator_id not in (select character_id from characters) limit 10');
-        if (ids.length > 0) {
-            ids = ids.map(x => x.creator_id);
-            for (const id of ids) {
+        let alli_creator_ids = await app.mysql.query('select creator_id from alliances where creator_id not in (select character_id from characters) limit 10');
+        if (alli_creator_ids.length > 0) {
+            alli_creator_ids = alli_creator_ids.map(x => x.creator_id);
+            for (const id of alli_creator_ids) {
                 await characters.add(app, id);
             }
         }
