@@ -19,14 +19,16 @@ async function isoToMysql(dateString) {
 async function add(app, char_id) {
     try {
         let data = await esi(app, 'char', char_id);
-        if (!data) {
+        if (!data) return;
+        if (data == "deleted") {
             data = {
                 corporation_id: 1,
                 name: "已删除"
             }
+        } else {
+            data = await formatData(data);
         }
 
-        data = await formatData(data);
         const {alliance_id, corporation_id, name, birthday, security_status, faction_id} = data;
         let result = await app.mysql.query(
             'insert ignore into characters ' +
@@ -36,7 +38,7 @@ async function add(app, char_id) {
         );
         if (result.affectedRows == 1) console.log('Char ' + char_id + ' added');
 
-        await updateHistory(app, char_id);
+        if (data.corporation_id != 1) await updateHistory(app, char_id);
     } catch (e) {
         console.log(e);
     }

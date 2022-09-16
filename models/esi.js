@@ -21,6 +21,9 @@ module.exports = async function (app, type, id) {
     if (res.statusCode == 200) {
         return JSON.parse(res.body);
     }
+    if (type == 'char' && res.statusCode == 404 && (JSON.parse(res.body)).error == "Character has been deleted!") {
+        return "deleted";
+    }
     // console.log(res);
 };
 
