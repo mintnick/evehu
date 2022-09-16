@@ -19,7 +19,12 @@ async function isoToMysql(dateString) {
 async function add(app, char_id) {
     try {
         let data = await esi(app, 'char', char_id);
-        if (!data) return;
+        if (!data) {
+            data = {
+                corporation_id: 1,
+                name: "已删除"
+            }
+        }
 
         data = await formatData(data);
         const {alliance_id, corporation_id, name, birthday, security_status, faction_id} = data;
