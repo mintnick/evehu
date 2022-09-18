@@ -21,7 +21,7 @@ mixin new(title, contents, type)
               td.image
                 +image(type, row.id, 48, row.name)
               td
-                a(href='/' + type + '/' + row.id)= row.name
-              td.text-center= row.birthday
+                a(href='/' + type + '/' + row.id).small= row.name
+              td.text-center(style="width: 37%")= row.birthday
               if show_mc
-                td.text-center= row.member_count
+                td.text-center(style="width: 13%")= row.member_count

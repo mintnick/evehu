@@ -28,10 +28,6 @@ nav {
   font-size: 1.3rem;
 }
 
-.navbar-collapse form button {
-  width: 100px;
-}
-
 .navbar-brand {
   font-size: 2rem;
   font-weight: 500;
@@ -42,123 +38,143 @@ nav {
   padding-top: 0px;
 }
 
-.donateBtn {
-  font-size: 1.3rem;
-  color:#000;
-  --background: #fff;
-  --border-color: linear-gradient(to bottom right, red, blue);
-  --border-width: .125em;
-  --edge-size: .5em;
-
-  position: relative;
-  isolation: isolate;
-
-  display: inline-grid;
-  padding: 0.4em 1.5em;
-  border: 0;
-  background-color: var(--background);
-  clip-path: polygon(
-      /* top-left 1 */
-      0% var(--edge-size),
-      /* top-left 2 */
-      var(--edge-size) 0%,
-      /* top-right */
-      100% 0,
-      /* bottom-right 1 */
-      100% calc(100% - var(--edge-size)),
-      /* bottom-right 2 */
-      calc(100% - var(--edge-size)) 100%,
-      /* bottom-left */
-      0 100%
-      );
-
-  transition: color 250ms;
+@media only screen and (max-width: 1000px) {
+  .navbar-nav .btn-group {
+    visibility: hidden;
+  }
 }
 
-.donateBtn::before,
-.donateBtn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
+
+/* .navbar-nav .btn-group button.btn {
+  width: 1vw;
+} */
+
+@media only screen and (min-width: 1000px) {
+  .donateBtn {
+    font-size: 1.3rem;
+    color:#000;
+    --background: #fff;
+    --border-color: linear-gradient(to bottom right, red, blue);
+    --border-width: .125em;
+    --edge-size: .5em;
+  
+    position: relative;
+    isolation: isolate;
+  
+    display: inline-grid;
+    padding: 0.4em 1.5em;
+    border: 0;
+    background-color: var(--background);
+    clip-path: polygon(
+        /* top-left 1 */
+        0% var(--edge-size),
+        /* top-left 2 */
+        var(--edge-size) 0%,
+        /* top-right */
+        100% 0,
+        /* bottom-right 1 */
+        100% calc(100% - var(--edge-size)),
+        /* bottom-right 2 */
+        calc(100% - var(--edge-size)) 100%,
+        /* bottom-left */
+        0 100%
+        );
+  
+    transition: color 250ms;
+  }
+  
+  .donateBtn::before,
+  .donateBtn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  
+  .donateBtn::before {
+    background: var(--border-color);
+    z-index: -2;
+  }
+  
+  .donateBtn::after {
+    background: var(--background);
+    z-index: -1;
+  
+    clip-path: polygon(
+        /* top-left 1 */
+        var(--border-width)
+        calc(var(--edge-size) + var(--border-width) * .5),
+        /* top-left 2 */
+        calc(var(--edge-size) + var(--border-width) * .5)
+        var(--border-width),
+        /* top-right */
+        calc(100% - var(--border-width))
+        var(--border-width),
+        /* bottom-right 1 */
+        calc(100% - var(--border-width))
+        calc(100% - calc(var(--edge-size) + var(--border-width) * .5)),
+        /* bottom-right 2 */
+        calc(100% - calc(var(--edge-size) + var(--border-width) * .5))
+        calc(100% - var(--border-width)),
+        /* bottom-left */
+        var(--border-width)
+        calc(100% - var(--border-width))
+        );
+  
+    transition: clip-path 500ms;
+  }
+  
+  .donateBtn:where(:hover, :focus) {
+    color: white;
+  }
+  
+  .donateBtn:where(:hover, :focus)::after {
+    clip-path: polygon(
+        /* top-left 1 */
+        calc(100% - var(--border-width))
+        calc(100% - calc(var(--edge-size) + var(--border-width) * .5)),
+        /* top-left 2 */
+        calc(100% - var(--border-width))
+        var(--border-width),
+        /* top-right */
+        calc(100% - var(--border-width))
+        var(--border-width),
+        /* bottom-right 1 */
+        calc(100% - var(--border-width))
+        calc(100% - calc(var(--edge-size) + var(--border-width) * .5)),
+        /* bottom-right 2 */
+        calc(100% - calc(var(--edge-size) + var(--border-width) * .5))
+        calc(100% - var(--border-width)),
+        /* bottom-left */
+        calc(100% - calc(var(--edge-size) + var(--border-width) * .5))
+        calc(100% - var(--border-width))
+        );
+  }
 }
 
-.donateBtn::before {
-  background: var(--border-color);
-  z-index: -2;
-}
-
-.donateBtn::after {
-  background: var(--background);
-  z-index: -1;
-
-  clip-path: polygon(
-      /* top-left 1 */
-      var(--border-width)
-      calc(var(--edge-size) + var(--border-width) * .5),
-      /* top-left 2 */
-      calc(var(--edge-size) + var(--border-width) * .5)
-      var(--border-width),
-      /* top-right */
-      calc(100% - var(--border-width))
-      var(--border-width),
-      /* bottom-right 1 */
-      calc(100% - var(--border-width))
-      calc(100% - calc(var(--edge-size) + var(--border-width) * .5)),
-      /* bottom-right 2 */
-      calc(100% - calc(var(--edge-size) + var(--border-width) * .5))
-      calc(100% - var(--border-width)),
-      /* bottom-left */
-      var(--border-width)
-      calc(100% - var(--border-width))
-      );
-
-  transition: clip-path 500ms;
-}
-
-.donateBtn:where(:hover, :focus) {
-  color: white;
-}
-
-.donateBtn:where(:hover, :focus)::after {
-  clip-path: polygon(
-      /* top-left 1 */
-      calc(100% - var(--border-width))
-      calc(100% - calc(var(--edge-size) + var(--border-width) * .5)),
-      /* top-left 2 */
-      calc(100% - var(--border-width))
-      var(--border-width),
-      /* top-right */
-      calc(100% - var(--border-width))
-      var(--border-width),
-      /* bottom-right 1 */
-      calc(100% - var(--border-width))
-      calc(100% - calc(var(--edge-size) + var(--border-width) * .5)),
-      /* bottom-right 2 */
-      calc(100% - calc(var(--edge-size) + var(--border-width) * .5))
-      calc(100% - var(--border-width)),
-      /* bottom-left */
-      calc(100% - calc(var(--edge-size) + var(--border-width) * .5))
-      calc(100% - var(--border-width))
-      );
-}
 
 /* Table */
-table {
-  font-size: 1.2em;
-  padding: 0, 0;
-}
-
-table td.small {
-  font-size: 16px;
-}
-
 table a {
   text-decoration: none;
 }
 
-table tr > td.image {
-  width: 1%;
-  white-space: nowrap;
+@media only screen and (min-width: 800px) {
+  table {
+    font-size: 1.2em;
+    padding: 0, 0;
+  }
+  
+  table td.small {
+    font-size: 16px;
+  }
+  
+  table tr > td.image {
+    width: 1%;
+    white-space: nowrap;
+  }
+
+  .table>:not(caption)>*>* {
+    padding: .2em .2em;
+  }
 }
 
 .join {
@@ -191,10 +207,6 @@ table tr > td.image {
 
 h2.title {
   color: var(--title);
-}
-
-.table>:not(caption)>*>* {
-  padding: .2em .2em;
 }
 
 /* auto-complete */

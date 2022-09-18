@@ -23,7 +23,7 @@ async function add(app, char_id) {
         if (data == "deleted") {
             data = {
                 corporation_id: 1,
-                name: "已删除"
+                name: "[已删除]"
             }
         } else {
             data = await formatData(data);
