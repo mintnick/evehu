@@ -2,7 +2,7 @@
 
 [中文](README_CN.md)
 
-[EVE户](http://evehu.cn/)("户" pronounced "who", means household/census) is an EVEWho-like website for the Serenity server(China server) based on [zKillboard/evewho](https://github.com/zKillboard/evewho).
+[EVE户](https://www.evehu.cn/)("户" pronounced "who", means household/census) is an EVEWho-like website for the Serenity server(China server) based on [zKillboard/evewho](https://github.com/zKillboard/evewho).
 
 ### Changes
 - New views
@@ -15,6 +15,12 @@
 
 ### Current status
 
-Open test
+Fetching characters: ~75%(2022.09.24)
 
-Data fetching process: ~60%(2022.09.02)
+### Other projects
+
+- [ESAM](https://github.com/mintnick/ESAM)
+EVE Online setting management tool, choose one profile to overwrite all
+
+- [EVEHu Timer](https://github.com/mintnick/evehu_timer)
+Campaign board for the Serenity server. [URL](https://timer.evehu.cn)
