@@ -1,24 +1,29 @@
-nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
-  .container-fluid
+//- nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3.justify-content-center
+//-   .container-fluid
     a.navbar-brand.logo(href='/')
       img(src='/images/icon.svg', width='30', height='30', alt='')
     a.navbar-brand(href='/') EVE户
-    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
-      span.navbar-toggler-icon
-    div#navbarSupportedContent.collapse.navbar-collapse
-      form(onsubmit= 'return false;' accept-charset="GB18030").d-flex.ms-1
-        input.form-control.me-2(type='search', name='name', id='autocomplete' placeholder='角色/公司/联盟' aria-label='Search')
-      ul.navbar-nav.me-auto.mb-2.mb-lg-0
-        li.nav-item
-          a.nav-link(href='https://github.com/mintnick/evehu', target='_blank') GitHub
-        li.nav-item
-          a.nav-link(href='/submit') 补充数据
-        li.nav-item
-          a.nav-link(href="/info") 说明文档
-        li.nav-item
-          a.nav-link(href="/projects") 其它项目
-        li.nav-item
-          a.nav-link(href="/donate") 捐赠
+    //- button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+    //-   span.navbar-toggler-icon
+    //- div#navbarSupportedContent.collapse.navbar-collapse
+
+ul.nav.d-flex.justify-content-center
+  .flex
+    a.navbar-brand.logo(href='/')
+      img(src='/images/icon.svg', width='30', height='30', alt='')
+    a.navbar-brand(href='/') EVE户
+  form(onsubmit= 'return false;' accept-charset="GB18030").d-flex.ms-1
+    input.form-control.me-2(type='search', name='name', id='autocomplete' placeholder='角色/公司/联盟' aria-label='Search')
+  li.nav-item
+    a.nav-link(href='https://github.com/mintnick/evehu', target='_blank') GitHub
+  li.nav-item
+    a.nav-link(href='/submit') 补充数据
+  li.nav-item
+    a.nav-link(href="/info") 说明文档
+  li.nav-item
+    a.nav-link(href="/projects") 其它项目
+  li.nav-item
+    a.nav-link(href="/donate") 捐赠
       //- ul.navbar-nav.mb-2.mb-lg-0.col-3.ps-3.pe-2
       //-   li.nav-item
       //-     a.nav-link(href='/') 首页

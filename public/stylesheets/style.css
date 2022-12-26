@@ -29,15 +29,17 @@ nav {
 }
 
 .navbar-brand {
+  color: white;
   font-size: 1.5rem;
   font-weight: 500;
   margin-right: 0;
 }
 
-.navbar
-.navbar-nav
+.nav
+.nav-item
 .nav-link {
   color: white;
+  text-decoration: underline;
 }
 
 .logo {
