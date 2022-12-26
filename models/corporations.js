@@ -1,4 +1,3 @@
-
 module.exports.add = add;
 module.exports.update = update;
 module.exports.updateHistory = updateHistory;

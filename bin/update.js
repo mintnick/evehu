@@ -22,11 +22,6 @@ app.isDowntime = () => {
     const time = hour + minute;
     return (time >= '1055' && time <= '1115');
 }
-// app.isLateNight = () => {
-//     const date = new Date();
-//     const hour = date.getHours();
-//     return (hour > 0 && hour < 10);
-// }
 
 let init = [
     // 'get/get_active_alliances.js',
@@ -37,7 +32,6 @@ let init = [
     // 'util/rename_npc_corps.js'
 ]
 
-// {filename : interval(ms)}
 let tasks = {
     // 'get/get_old_entities_char.js': 15,
     // // 'get_old_characters.js': 1, // finished
@@ -61,10 +55,6 @@ let tasks = {
 
 
 };
-
-// let secondTasks = {
-
-// };
 
 function initialize() {
     for (const task of init) {
@@ -111,11 +101,6 @@ async function update(app, taskList) {
 
     await app.sleep(Math.min(1000, Date.now() - now));
     if (app.debug == false) {
-        // if (app.isLateNight()) {
-        //     update(app, secondTasks);
-        // } else {
-        //     update(app, tasks);
-        // }
         update(app, tasks)
     }
 }
@@ -123,16 +108,8 @@ async function update(app, taskList) {
 async function clearRunKeys(app) {
     let keys = await app.redis.keys('crinstance:running*');
     for (const key of keys) await app.redis.del(key);
-    
-    // keys = await app.redis.keys('crinstance:current*');
-    // for (const key of keys) await app.redis.del(key);
 
-    setTimeout(() => { 
-        // if (app.isLateNight()) {
-        //     update(app, secondTasks);
-        // } else {
-        //     update(app, tasks);
-        // }
+    setTimeout(() => {
         update(app, tasks);
     }, 1);
 }

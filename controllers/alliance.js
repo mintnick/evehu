@@ -10,7 +10,6 @@ module.exports = async function (req, res) {
         'where alliance_id = ?', 
         [alli_id]);
     if (details.length == 0) res.render('404');
-    // await req.app.mysql.query('update alliances set is_active = 1 where alliance_id = ?', [alli_id]);
 
     data.id = alli_id;
     data.details = details[0];
@@ -46,7 +45,6 @@ module.exports = async function (req, res) {
     }
 
     // history
-
     data.join = await req.app.mysql.query(
         'select distinct(c.corporation_id) id, c.name, DATE_FORMAT(ah.start_date, "%Y年%m月%d日") start_date '+
         'from corporations c left join alliance_history ah on c.corporation_id = ah.corporation_id '+
@@ -63,11 +61,6 @@ module.exports = async function (req, res) {
         'limit 100',
         [alli_id]
     );
-    // data.history = await req.app.mysql.query(
-    //     'select * from alliance_history where alliance_id = ?',
-    //     [alli_id]
-    // );
-
-    // console.log(data.left);
+    
     return data;
 }

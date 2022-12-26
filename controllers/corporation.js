@@ -9,7 +9,6 @@ module.exports = async function (req, res) {
         'where c.corporation_id = ?', [corp_id]
         );
     if (details.length == 0) res.render('404');
-    // await req.app.mysql.query('update corporations set is_active = 1 where corporation_id = ?', [corp_id]);
 
     data.id = corp_id;
     data.details = details[0];
@@ -41,6 +40,5 @@ module.exports = async function (req, res) {
         [corp_id]
     )
     
-    // console.log(data.details);
     return data;
 }
