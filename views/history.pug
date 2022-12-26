@@ -14,10 +14,10 @@ mixin history(type, members, join, left, history)
 
     if type == 'alliance'
       li.nav-item(role='presentation')
-          button.nav-link.join#join-tab(data-bs-toggle="tab", data-bs-target="#join", type="button", role="tab", aria-controls="join", aria-selected="true") #{title}加入
+          button.nav-link.join#join-tab(data-bs-toggle="tab", data-bs-target="#join", type="button", role="tab", aria-controls="join", aria-selected="true") 最近加入#{title}
 
     li.nav-item(role='presentation')
-        button.nav-link.leave#leave-tab(data-bs-toggle="tab", data-bs-target="#leave", type="button", role="tab", aria-controls="leave", aria-selected="true") #{title}离开
+        button.nav-link.leave#leave-tab(data-bs-toggle="tab", data-bs-target="#leave", type="button", role="tab", aria-controls="leave", aria-selected="true") 最近离开#{title}
 
   div.tab-content#history-nav-content
     if type == 'alliance'

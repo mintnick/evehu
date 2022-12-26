@@ -26,7 +26,8 @@ module.exports = async function (req, res) {
     data.characters = await req.app.mysql.query(
         'select c.character_id id, c.name name, date_format(ch.start_date, "%Y年%m月%d日") start_date '+
         'from characters c left join corporation_history ch on c.character_id = ch.character_id '+
-        'where c.corporation_id = ? and ch.end_date is null order by start_date desc',
+        'where c.corporation_id = ? and ch.end_date is null order by start_date desc ' +
+        'limit 100',
         [corp_id]
     );
 
@@ -35,7 +36,8 @@ module.exports = async function (req, res) {
         'select c.character_id id, c.name name, date_format(ch.start_date, "%Y年%m月%d日") start_date, date_format(max(ch.end_date), "%Y年%m月%d日") end_date '+
         'from characters c join corporation_history ch on c.character_id = ch.character_id '+
         'where ch.corporation_id = ? and ch.end_date is not null ' +
-        'group by ch.character_id, ch.start_date order by end_date desc',
+        'group by ch.character_id, ch.start_date order by end_date desc ' +
+        'limit 100',
         [corp_id]
     )
     

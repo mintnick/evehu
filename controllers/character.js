@@ -21,7 +21,8 @@ module.exports = async function(req, res) {
     data.history = await req.app.mysql.query(
         'select ch.corporation_id id, c.name name, date_format(ch.start_date, "%Y年%m月%d日") start_date, date_format(ch.end_date, "%Y年%m月%d日") end_date '+
         'from corporation_history ch join corporations c on ch.corporation_id = c.corporation_id '+
-        'where ch.character_id = ? order by start_date desc',
+        'where ch.character_id = ? order by start_date desc ' +
+        'limit 100',
         [char_id]
     )
     // console.log(data.details);

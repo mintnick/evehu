@@ -50,7 +50,8 @@ module.exports = async function (req, res) {
     data.join = await req.app.mysql.query(
         'select distinct(c.corporation_id) id, c.name, DATE_FORMAT(ah.start_date, "%Y年%m月%d日") start_date '+
         'from corporations c left join alliance_history ah on c.corporation_id = ah.corporation_id '+
-        'where ah.alliance_id = ? and ah.end_date is null order by start_date desc',
+        'where ah.alliance_id = ? and ah.end_date is null order by start_date desc ' +
+        'limit 100',
         [alli_id]
     );
 
@@ -58,7 +59,8 @@ module.exports = async function (req, res) {
         'select ah.corporation_id id, c.name, date_format(ah.start_date, "%Y年%m月%d日") start_date, date_format(max(ah.end_date), "%Y年%m月%d日") end_date '+
         'from corporations c join alliance_history ah on c.corporation_id = ah.corporation_id '+
         'where ah.alliance_id = ? and ah.end_date is not null '+
-        'group by ah.corporation_id, ah.start_date order by end_date desc',
+        'group by ah.corporation_id, ah.start_date order by end_date desc ' +
+        'limit 100',
         [alli_id]
     );
     // data.history = await req.app.mysql.query(
