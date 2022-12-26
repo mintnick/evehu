@@ -38,7 +38,7 @@ nav {
   padding-top: 0px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1300px) {
   .navbar-nav .btn-group {
     visibility: hidden;
   }
@@ -49,7 +49,7 @@ nav {
   width: 1vw;
 } */
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1300px) {
   .donateBtn {
     font-size: 1.3rem;
     color:#000;
@@ -157,7 +157,7 @@ table a {
   text-decoration: none;
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 1200px) {
   table {
     font-size: 1.2em;
     padding: 0, 0;
