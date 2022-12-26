@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
+    "start": "node ./bin/www.js",
+    "dev": "nodemon ./bin/www.js",
     "updatestart": "nodemon ./bin/update"
   },
   "dependencies": {
@@ -20,5 +20,8 @@
     "phin": "^3.6.1",
     "pug": "^3.0.1",
     "utf8": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

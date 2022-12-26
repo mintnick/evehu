@@ -70,4 +70,6 @@ mixin details(details, type, id)
           h5 创建时间
         td
           h6= details.date_founded
-      +kb(type, details.alliance_id)
+      tr
+        td.align-center(colspan=2)
+          +kb(type, id)

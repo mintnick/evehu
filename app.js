@@ -14,7 +14,7 @@ var app = express();
 app.root = __dirname;
 app.redis = redis;
 app.mysql = new MySQLDB({
-  host: 'localhost',
+  host: '127.0.0.1',
   user: 'root',
   password: 'password',
   database: 'evehu'

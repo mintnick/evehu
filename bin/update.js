@@ -5,7 +5,7 @@ const phin = require('phin').defaults({'method': 'get', 'headers': { 'User-Agent
 const app = {}
 
 app.mysql = new MySQLDB({
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root',
     password: 'password',
     database: 'evehu'
@@ -22,11 +22,11 @@ app.isDowntime = () => {
     const time = hour + minute;
     return (time >= '1055' && time <= '1115');
 }
-app.isLateNight = () => {
-    const date = new Date();
-    const hour = date.getHours();
-    return (hour > 0 && hour < 10);
-}
+// app.isLateNight = () => {
+//     const date = new Date();
+//     const hour = date.getHours();
+//     return (hour > 0 && hour < 10);
+// }
 
 let init = [
     // 'get/get_active_alliances.js',
@@ -37,7 +37,7 @@ let init = [
     // 'util/rename_npc_corps.js'
 ]
 
-// {filename : seconds}
+// {filename : interval(ms)}
 let tasks = {
     // 'get/get_old_entities_char.js': 15,
     // // 'get_old_characters.js': 1, // finished
@@ -45,7 +45,7 @@ let tasks = {
     'get/get_corporations.js': 600,
     'get/get_alliances.js': 1800,
 
-    // // 'update/update_characters.js': 5,
+    // // // 'update/update_characters.js': 5,
     'update/update_corporations.js': 60,
     'update/update_alliances.js': 600,
 
@@ -53,17 +53,18 @@ let tasks = {
     'update/update_char_by_affiliation.js': 5,
 
     'update/update_redis_home.js': 600,
-    // 'update/update_delta.js': 14400, // (3am - 7am)
 
-
-};
-
-let secondTasks = {
-    'get/get_old_entities_char.js': 3,
-    'util/populate_missing_entities.js': 15,
+    // 'get/get_old_entities_char.js': 3,
+    // 'util/populate_missing_entities.js': 15,
     
     'update/update_delta.js': 14400, // (3am - 7am)
+
+
 };
+
+// let secondTasks = {
+
+// };
 
 function initialize() {
     for (const task of init) {
@@ -110,11 +111,12 @@ async function update(app, taskList) {
 
     await app.sleep(Math.min(1000, Date.now() - now));
     if (app.debug == false) {
-        if (app.isLateNight()) {
-            update(app, secondTasks);
-        } else {
-            update(app, tasks);
-        }
+        // if (app.isLateNight()) {
+        //     update(app, secondTasks);
+        // } else {
+        //     update(app, tasks);
+        // }
+        update(app, tasks)
     }
 }
 
@@ -126,11 +128,12 @@ async function clearRunKeys(app) {
     // for (const key of keys) await app.redis.del(key);
 
     setTimeout(() => { 
-        if (app.isLateNight()) {
-            update(app, secondTasks);
-        } else {
-            update(app, tasks);
-        }
+        // if (app.isLateNight()) {
+        //     update(app, secondTasks);
+        // } else {
+        //     update(app, tasks);
+        // }
+        update(app, tasks);
     }, 1);
 }
 
