@@ -8,6 +8,7 @@
     "updatestart": "nodemon ./bin/update"
   },
   "dependencies": {
+    "apicache": "^1.6.3",
     "async-redis": "^2.0.0",
     "body-parser": "^1.20.0",
     "cookie-parser": "~1.4.4",
