@@ -17,6 +17,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cache('10 minutes'));
 app.get('/',(req, res) => res.sendFile('index.html'));
 var apiRouter = require('./routes/api');
+app.use((req, res, next) => {
+  res.setHeader('Content-Type', 'application/json');
+  next();
+})
 app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
